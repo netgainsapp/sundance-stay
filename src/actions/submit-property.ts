@@ -38,6 +38,7 @@ export async function submitProperty(_prev: FormState, formData: FormData): Prom
         propertyAddress: d.propertyAddress, propertyType: d.propertyType,
         bedrooms: d.bedrooms, bathrooms: d.bathrooms, capacity: d.capacity,
         availabilityDates: d.availabilityDates || null, description: d.description,
+        bookingUrl: d.bookingUrl || null,
       },
     });
 
@@ -45,7 +46,8 @@ export async function submitProperty(_prev: FormState, formData: FormData): Prom
       `Name: ${d.name}`, `Email: ${d.email}`, `Phone: ${d.phone || "n/a"}`,
       `Address: ${d.propertyAddress}`, `Type: ${d.propertyType}`,
       `Bedrooms: ${d.bedrooms}  Bathrooms: ${d.bathrooms}  Sleeps: ${d.capacity}`,
-      `Availability: ${d.availabilityDates || "n/a"}`, "", d.description,
+      `Availability: ${d.availabilityDates || "n/a"}`,
+      `Booking link: ${d.bookingUrl || "n/a"}`, "", d.description,
     ]);
   } catch (err) {
     console.error("submitProperty failed", err);

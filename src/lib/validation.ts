@@ -25,6 +25,9 @@ export const propertySubmissionSchema = z.object({
   capacity: z.coerce.number().int().min(1).max(60),
   availabilityDates: z.string().max(240).optional().or(z.literal("")),
   description: z.string().min(20, "Please describe the property").max(4000),
+  bookingUrl: z
+    .union([z.literal(""), z.url("Enter a valid link, including https")])
+    .optional(),
   website: honeypot,
 });
 export type PropertySubmissionInput = z.infer<typeof propertySubmissionSchema>;

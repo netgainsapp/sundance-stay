@@ -142,10 +142,34 @@ export default async function PropertyPage({
 
         <div className="lg:col-span-1">
           <div className="rounded-card border border-charcoal/10 p-6 shadow-sm lg:sticky lg:top-24">
-            <h2 className="font-heading text-xl text-charcoal">
-              Inquire about this home
-            </h2>
-            <div className="mt-5">
+            {property.bookingUrl ? (
+              <>
+                <h2 className="font-heading text-xl text-charcoal">
+                  Book this home
+                </h2>
+                <a
+                  href={property.bookingUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="mt-5 inline-flex w-full items-center justify-center rounded-card bg-mountain px-6 py-3 text-sm font-medium text-white transition-colors hover:bg-charcoal"
+                >
+                  Book this home
+                </a>
+                <p className="mt-2 text-xs text-charcoal/50">
+                  Booking is handled on the host&#39;s own site.
+                </p>
+                <div className="my-6 flex items-center gap-3 text-xs uppercase tracking-wide text-charcoal/40">
+                  <span className="h-px flex-1 bg-charcoal/10" />
+                  or message the host
+                  <span className="h-px flex-1 bg-charcoal/10" />
+                </div>
+              </>
+            ) : (
+              <h2 className="font-heading text-xl text-charcoal">
+                Inquire about this home
+              </h2>
+            )}
+            <div className={property.bookingUrl ? "" : "mt-5"}>
               <InquiryForm
                 sourceType="property_inquiry"
                 propertySlug={property.slug}

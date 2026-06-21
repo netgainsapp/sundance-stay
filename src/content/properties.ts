@@ -3,6 +3,7 @@ import type { Property } from "@/content/types";
 export const properties: Property[] = [
   {
     slug: "pearl-street-penthouse",
+    bookingUrl: "https://www.airbnb.com/",
     title: "Pearl Street Penthouse",
     description:
       "Perched above the Pearl Street Mall, this top floor residence pairs floor to ceiling windows with curated furnishings and uninterrupted flatiron views. Mornings begin with sunlight across the open living space and evenings end on a private terrace above the city lights. Every detail, from the chef grade kitchen to the spa inspired bath, has been chosen for guests who expect the very best.",
@@ -49,6 +50,7 @@ export const properties: Property[] = [
   },
   {
     slug: "chautauqua-trail-cottage",
+    bookingUrl: "https://www.vrbo.com/",
     title: "Chautauqua Trail Cottage",
     description:
       "A storybook cottage moments from the Chautauqua trailheads, where the foothills rise just beyond the garden gate. Inside, warm wood floors and a stone fireplace create a comfortable retreat after a day on the trails. The covered porch invites slow mornings with coffee and the sound of the canyon wind.",
@@ -90,6 +92,7 @@ export const properties: Property[] = [
   },
   {
     slug: "north-boulder-artist-loft",
+    bookingUrl: "https://www.airbnb.com/",
     title: "North Boulder Artist Loft",
     description:
       "Set among the studios of the North Boulder art district, this airy loft celebrates light and craft. Soaring ceilings, gallery white walls, and a wall of windows frame the open mountain horizon. It is a calm, creative space for guests who want room to breathe and a quieter side of the city.",
@@ -167,6 +170,7 @@ export const properties: Property[] = [
   },
   {
     slug: "louisville-main-street-bungalow",
+    bookingUrl: "https://www.vrbo.com/",
     title: "Louisville Main Street Bungalow",
     description:
       "A restored bungalow a short stroll from the historic Louisville main street and its weekend markets. Original character meets thoughtful updates, with a sunlit kitchen and a shaded backyard built for relaxed evenings. It is the perfect base for guests who love small town charm with easy reach to Boulder.",
@@ -239,6 +243,7 @@ export const properties: Property[] = [
   },
   {
     slug: "longmont-prairie-view-cabin",
+    bookingUrl: "https://www.airbnb.com/",
     title: "Longmont Prairie View Cabin",
     description:
       "A peaceful cabin on the edge of Longmont where the prairie opens to the western peaks. Warm timber interiors and a wood stove make it a snug winter escape, while the wraparound deck shines in summer. Wide skies and quiet nights define every stay here.",
@@ -311,6 +316,7 @@ export const properties: Property[] = [
   },
   {
     slug: "denver-lodo-loft",
+    bookingUrl: "https://www.airbnb.com/",
     title: "Denver LoDo Loft",
     description:
       "An exposed brick loft in the historic Lower Downtown district, surrounded by Denver's best dining, galleries, and ballpark energy. Industrial details meet plush furnishings for a stay that feels both urban and warm. From here the whole capital city is at your doorstep, with the mountains a short drive west.",

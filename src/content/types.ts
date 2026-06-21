@@ -22,6 +22,9 @@ export interface Property {
   images: PropertyImage[];
   featured: boolean;
   tier: Tier;
+  // Optional direct booking link to the host's own channel (Airbnb, Vrbo, or
+  // their own site). We funnel demand there; we never process the booking.
+  bookingUrl?: string;
 }
 
 export interface Business {

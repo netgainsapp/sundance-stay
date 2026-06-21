@@ -57,6 +57,7 @@ model PropertySubmission {
   capacity          Int
   availabilityDates String?
   description       String
+  bookingUrl        String?
   status            LeadStatus @default(new)
   createdAt         DateTime   @default(now())
 }

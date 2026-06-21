@@ -33,6 +33,7 @@ export function PropertySubmissionForm() {
       <Field label="Bathrooms" name="bathrooms" type="number" min={1} error={state.errors?.bathrooms} required />
       <Field label="Sleeps" name="capacity" type="number" min={1} error={state.errors?.capacity} required />
       <Field label="Availability Dates" name="availabilityDates" error={state.errors?.availabilityDates} />
+      <Field label="Booking link (Airbnb, Vrbo, or your site)" name="bookingUrl" type="url" error={state.errors?.bookingUrl} />
       <div>
         <label htmlFor="description" className="block text-sm font-medium text-charcoal">Description<span className="text-copper"> *</span></label>
         <textarea id="description" name="description" rows={4} required className="mt-1 w-full rounded-card border border-charcoal/20 px-3 py-2 text-sm focus:border-mountain focus:outline-none focus:ring-1 focus:ring-mountain" />
