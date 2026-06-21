@@ -1,8 +1,10 @@
 import Image from "next/image";
 import { SectionHeader } from "@/components/ui/SectionHeader";
 import { Cta } from "@/components/ui/Cta";
+import Link from "next/link";
 import { PropertySubmissionForm } from "@/components/forms/PropertySubmissionForm";
 import { pageMetadata } from "@/lib/seo";
+import { priceFor, formatPrice } from "@/lib/pricing";
 
 export const metadata = pageMetadata({
   title: "List Your Boulder Home",
@@ -28,32 +30,29 @@ const benefits = [
 
 const tiers = [
   {
-    name: "Basic",
+    name: "Standard Listing",
     positioning: "A clean, credible presence for your home.",
-    features: ["Standard listing", "Neighborhood placement", "Inquiry form"],
+    price: priceFor("short_term_rentals", "standard"),
+    features: [
+      "Directory listing with full details",
+      "Neighborhood placement",
+      "Photo gallery",
+      "Direct inquiry form",
+    ],
     emphasized: false,
   },
   {
-    name: "Featured",
-    positioning: "Greater visibility for homes that deserve attention.",
+    name: "Premium Visibility",
+    positioning: "Priority placement for homes that deserve attention.",
+    price: priceFor("short_term_rentals", "premium"),
     features: [
-      "Everything in Basic",
-      "Priority placement",
-      "Featured badge",
+      "Everything in Standard",
+      "Priority placement in search",
+      "Highlighted featured card",
       "Larger gallery",
+      "Homepage eligibility",
     ],
     emphasized: true,
-  },
-  {
-    name: "Premier",
-    positioning: "Our highest level of exposure and support.",
-    features: [
-      "Everything in Featured",
-      "Homepage eligibility",
-      "Top of search",
-      "Concierge onboarding",
-    ],
-    emphasized: false,
   },
 ];
 
@@ -129,8 +128,9 @@ export default function ListYourHomePage() {
         <SectionHeader
           eyebrow="Listing tiers"
           title="Choose how you appear"
+          intro="Flat fee for the Festival Season window. No commission on your bookings, ever."
         />
-        <div className="mt-12 grid gap-8 md:grid-cols-3">
+        <div className="mt-12 grid gap-8 md:grid-cols-2">
           {tiers.map((tier) => (
             <div
               key={tier.name}
@@ -143,6 +143,12 @@ export default function ListYourHomePage() {
               <h3 className="font-heading text-2xl text-charcoal">{tier.name}</h3>
               <p className="mt-2 text-sm leading-relaxed text-charcoal/70">
                 {tier.positioning}
+              </p>
+              <p className="mt-6 font-heading text-4xl text-charcoal">
+                {formatPrice(tier.price)}
+                <span className="ml-2 text-sm font-normal text-charcoal/50">
+                  per festival window
+                </span>
               </p>
               <ul className="mt-6 flex-1 space-y-3">
                 {tier.features.map((f) => (
@@ -158,12 +164,20 @@ export default function ListYourHomePage() {
                   variant={tier.emphasized ? "primary" : "secondary"}
                   className="w-full"
                 >
-                  Contact for pricing
+                  Request this listing
                 </Cta>
               </div>
             </div>
           ))}
         </div>
+        <p className="mt-8 text-sm text-charcoal/60">
+          Want maximum reach? Featured Guide placement and the homepage Large
+          Carousel are available on the{" "}
+          <Link href="/advertise" className="text-mountain underline">
+            Advertise
+          </Link>{" "}
+          page.
+        </p>
       </section>
 
       <section className="mx-auto max-w-7xl px-6 py-[var(--space-section)]">
