@@ -5,6 +5,7 @@ import { propertySubmissionSchema } from "@/lib/validation";
 import { prisma } from "@/lib/prisma";
 import { sendLeadNotification } from "@/lib/email";
 import { checkRateLimit } from "@/lib/rate-limit";
+import { clientIp } from "@/lib/request";
 import type { FormState } from "./submit-lead";
 
 export async function submitProperty(_prev: FormState, formData: FormData): Promise<FormState> {
@@ -24,27 +25,32 @@ export async function submitProperty(_prev: FormState, formData: FormData): Prom
   }
 
   const hdrs = await headers();
-  const ip = hdrs.get("x-forwarded-for")?.split(",")[0]?.trim() ?? "unknown";
-  if (!checkRateLimit(ip).ok) {
+  const ip = clientIp(hdrs);
+  if (!checkRateLimit(`property:${ip}`).ok) {
     return { ok: false, message: "Too many requests. Please try again shortly." };
   }
 
   const d = parsed.data;
-  await prisma.propertySubmission.create({
-    data: {
-      name: d.name, email: d.email, phone: d.phone || null,
-      propertyAddress: d.propertyAddress, propertyType: d.propertyType,
-      bedrooms: d.bedrooms, bathrooms: d.bathrooms, capacity: d.capacity,
-      availabilityDates: d.availabilityDates || null, description: d.description,
-    },
-  });
+  try {
+    await prisma.propertySubmission.create({
+      data: {
+        name: d.name, email: d.email, phone: d.phone || null,
+        propertyAddress: d.propertyAddress, propertyType: d.propertyType,
+        bedrooms: d.bedrooms, bathrooms: d.bathrooms, capacity: d.capacity,
+        availabilityDates: d.availabilityDates || null, description: d.description,
+      },
+    });
 
-  await sendLeadNotification("New property submission", [
-    `Name: ${d.name}`, `Email: ${d.email}`, `Phone: ${d.phone || "n/a"}`,
-    `Address: ${d.propertyAddress}`, `Type: ${d.propertyType}`,
-    `Bedrooms: ${d.bedrooms}  Bathrooms: ${d.bathrooms}  Sleeps: ${d.capacity}`,
-    `Availability: ${d.availabilityDates || "n/a"}`, "", d.description,
-  ]);
+    await sendLeadNotification("New property submission", [
+      `Name: ${d.name}`, `Email: ${d.email}`, `Phone: ${d.phone || "n/a"}`,
+      `Address: ${d.propertyAddress}`, `Type: ${d.propertyType}`,
+      `Bedrooms: ${d.bedrooms}  Bathrooms: ${d.bathrooms}  Sleeps: ${d.capacity}`,
+      `Availability: ${d.availabilityDates || "n/a"}`, "", d.description,
+    ]);
+  } catch (err) {
+    console.error("submitProperty failed", err);
+    return { ok: false, message: "Something went wrong on our end. Please try again." };
+  }
 
   return { ok: true, message: "Thank you. We will review your property and reach out." };
 }
