@@ -6,7 +6,10 @@ export async function middleware(req: NextRequest) {
   const { pathname } = req.nextUrl;
 
   // The login page must stay public so the operator can authenticate.
-  if (pathname === "/admin/login") return NextResponse.next();
+  // Handle the trailing-slash variant so it never redirect-loops.
+  if (pathname === "/admin/login" || pathname === "/admin/login/") {
+    return NextResponse.next();
+  }
 
   const token = req.cookies.get(COOKIE_NAME)?.value;
   if (await verifySessionToken(token)) return NextResponse.next();
@@ -18,5 +21,6 @@ export async function middleware(req: NextRequest) {
 }
 
 export const config = {
-  matcher: ["/admin/:path*", "/api/admin/:path*"],
+  // Match the bare /admin path explicitly as well as all nested paths.
+  matcher: ["/admin", "/admin/:path*", "/api/admin", "/api/admin/:path*"],
 };

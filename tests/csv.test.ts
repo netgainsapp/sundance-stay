@@ -28,6 +28,26 @@ describe("toCsv", () => {
     expect(out).toBe('Name,Note,Count\r\n"Doe, Jane","say ""hi""\nplease",1');
   });
 
+  it("neutralizes spreadsheet formula injection", () => {
+    const out = toCsv<{ name: string }>(
+      [{ name: "=HYPERLINK(\"http://evil.test\")" }],
+      [{ header: "Name", value: (r) => r.name }],
+    );
+    // Leading "=" gets a single-quote prefix; the embedded quotes also force
+    // the cell to be wrapped and doubled.
+    expect(out).toBe(
+      'Name\r\n"\'=HYPERLINK(""http://evil.test"")"',
+    );
+  });
+
+  it("prefixes other formula triggers (+, -, @)", () => {
+    const out = toCsv<{ v: string }>(
+      [{ v: "+1" }, { v: "-2" }, { v: "@cmd" }],
+      [{ header: "V", value: (r) => r.v }],
+    );
+    expect(out).toBe("V\r\n'+1\r\n'-2\r\n'@cmd");
+  });
+
   it("renders null and undefined as empty cells", () => {
     const out = toCsv<{ a: string | null; b: undefined }>(
       [{ a: null, b: undefined }],

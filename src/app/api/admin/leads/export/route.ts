@@ -1,6 +1,6 @@
-import { requireAdmin } from "@/lib/admin-auth";
 import { prisma } from "@/lib/prisma";
 import { toCsv } from "@/lib/csv";
+import { guardCsvExport, csvResponse } from "@/lib/admin-export";
 import type { Lead, Prisma } from "@/generated/prisma/client";
 
 const SOURCE_TYPES = [
@@ -13,11 +13,8 @@ const SOURCE_TYPES = [
 const STATUSES = ["new", "contacted", "closed"] as const;
 
 export async function GET(request: Request) {
-  try {
-    await requireAdmin();
-  } catch {
-    return new Response("Unauthorized", { status: 401 });
-  }
+  const blocked = await guardCsvExport(request);
+  if (blocked) return blocked;
 
   const { searchParams } = new URL(request.url);
   const sourceParam = searchParams.get("source") ?? undefined;
@@ -53,10 +50,5 @@ export async function GET(request: Request) {
     { header: "Message", value: (r) => r.message },
   ]);
 
-  return new Response(csv, {
-    headers: {
-      "Content-Type": "text/csv; charset=utf-8",
-      "Content-Disposition": `attachment; filename="leads.csv"`,
-    },
-  });
+  return csvResponse(csv, "leads.csv");
 }

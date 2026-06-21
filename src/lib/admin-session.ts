@@ -5,7 +5,13 @@
  * payload is `{ exp: <unix seconds> }`.
  */
 
-export const COOKIE_NAME = "sundance_admin";
+// The __Host- prefix forces the browser to require Secure + path=/ + no Domain,
+// which hardens against subdomain and downgrade attacks. It requires HTTPS, so
+// it is only used in production (local dev runs over plain http).
+export const COOKIE_NAME =
+  process.env.NODE_ENV === "production"
+    ? "__Host-sundance_admin"
+    : "sundance_admin";
 export const MAX_AGE_SECONDS = 60 * 60 * 24 * 7; // 7 days
 
 function getSecret(): string {
@@ -40,11 +46,19 @@ async function sign(data: string, secret: string): Promise<string> {
   return toBase64url(new Uint8Array(sig));
 }
 
-/** Constant-time string comparison. */
+/**
+ * Constant-time string comparison. Loops over the longer input and folds any
+ * length difference into the result, so it does not early-return on a length
+ * mismatch (which would leak length via timing).
+ */
 function safeEqual(a: string, b: string): boolean {
-  if (a.length !== b.length) return false;
-  let mismatch = 0;
-  for (let i = 0; i < a.length; i++) mismatch |= a.charCodeAt(i) ^ b.charCodeAt(i);
+  const ab = new TextEncoder().encode(a);
+  const bb = new TextEncoder().encode(b);
+  const len = Math.max(ab.length, bb.length);
+  let mismatch = ab.length ^ bb.length;
+  for (let i = 0; i < len; i++) {
+    mismatch |= (ab[i] ?? 0) ^ (bb[i] ?? 0);
+  }
   return mismatch === 0;
 }
 

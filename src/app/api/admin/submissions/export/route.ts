@@ -1,16 +1,13 @@
-import { requireAdmin } from "@/lib/admin-auth";
 import { prisma } from "@/lib/prisma";
 import { toCsv } from "@/lib/csv";
+import { guardCsvExport, csvResponse } from "@/lib/admin-export";
 import type { PropertySubmission, Prisma } from "@/generated/prisma/client";
 
 const STATUSES = ["new", "contacted", "closed"] as const;
 
 export async function GET(request: Request) {
-  try {
-    await requireAdmin();
-  } catch {
-    return new Response("Unauthorized", { status: 401 });
-  }
+  const blocked = await guardCsvExport(request);
+  if (blocked) return blocked;
 
   const { searchParams } = new URL(request.url);
   const statusParam = searchParams.get("status") ?? undefined;
@@ -45,10 +42,5 @@ export async function GET(request: Request) {
     { header: "Description", value: (r) => r.description },
   ]);
 
-  return new Response(csv, {
-    headers: {
-      "Content-Type": "text/csv; charset=utf-8",
-      "Content-Disposition": `attachment; filename="submissions.csv"`,
-    },
-  });
+  return csvResponse(csv, "submissions.csv");
 }
