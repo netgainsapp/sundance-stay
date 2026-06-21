@@ -9,7 +9,11 @@ import {
   COOKIE_NAME,
   MAX_AGE_SECONDS,
 } from "@/lib/admin-session";
-import { checkRateLimit } from "@/lib/rate-limit";
+import {
+  isLoginLocked,
+  recordLoginFailure,
+  clearLoginFailures,
+} from "@/lib/login-guard";
 import { clientIp } from "@/lib/request";
 
 const loginSchema = z.object({
@@ -25,8 +29,11 @@ export async function login(
 ): Promise<LoginState> {
   const hdrs = await headers();
   const ip = clientIp(hdrs);
-  if (!checkRateLimit(`admin-login:${ip}`).ok) {
-    return { error: "Too many attempts. Please wait a few minutes and try again." };
+
+  const lock = await isLoginLocked(ip);
+  if (lock.locked) {
+    const mins = Math.max(1, Math.ceil((lock.retryAfterSec ?? 60) / 60));
+    return { error: `Too many attempts. Try again in about ${mins} minutes.` };
   }
 
   const parsed = loginSchema.safeParse(Object.fromEntries(formData.entries()));
@@ -44,8 +51,11 @@ export async function login(
   // Always run bcrypt so timing does not reveal whether the email matched.
   const passOk = await bcrypt.compare(parsed.data.password, hash);
   if (!emailOk || !passOk) {
+    await recordLoginFailure(ip);
     return { error: "Invalid email or password." };
   }
+
+  await clearLoginFailures(ip);
 
   const token = await createSessionToken();
   const store = await cookies();

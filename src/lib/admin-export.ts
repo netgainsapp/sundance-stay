@@ -1,5 +1,5 @@
 import { requireAdmin } from "./admin-auth";
-import { checkRateLimit } from "./rate-limit";
+import { rateLimit } from "./rate-limit-durable";
 import { clientIp } from "./request";
 
 /**
@@ -25,7 +25,7 @@ export async function guardCsvExport(request: Request): Promise<Response | null>
   }
 
   const ip = clientIp(request.headers);
-  if (!checkRateLimit(`admin-export:${ip}`).ok) {
+  if (!(await rateLimit("admin-export", ip, 30, 600)).ok) {
     return new Response("Too many requests", { status: 429 });
   }
 

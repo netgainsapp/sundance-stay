@@ -4,7 +4,7 @@ const create = vi.fn();
 vi.mock("@/lib/prisma", () => ({ prisma: { lead: { create: (...a: unknown[]) => create(...a) } } }));
 const sendLeadNotification = vi.fn();
 vi.mock("@/lib/email", () => ({ sendLeadNotification: (...a: unknown[]) => sendLeadNotification(...a) }));
-vi.mock("@/lib/rate-limit", () => ({ checkRateLimit: () => ({ ok: true }) }));
+vi.mock("@/lib/rate-limit-durable", () => ({ rateLimit: async () => ({ ok: true }) }));
 vi.mock("next/headers", () => ({ headers: async () => new Map([["x-forwarded-for", "1.2.3.4"]]) }));
 
 import { submitLead } from "@/actions/submit-lead";

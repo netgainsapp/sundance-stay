@@ -4,7 +4,7 @@ import { headers } from "next/headers";
 import { leadSchema } from "@/lib/validation";
 import { prisma } from "@/lib/prisma";
 import { sendLeadNotification } from "@/lib/email";
-import { checkRateLimit } from "@/lib/rate-limit";
+import { rateLimit } from "@/lib/rate-limit-durable";
 import { clientIp } from "@/lib/request";
 
 export type FormState = { ok: boolean; message?: string; errors?: Record<string, string> };
@@ -27,7 +27,7 @@ export async function submitLead(_prev: FormState, formData: FormData): Promise<
 
   const hdrs = await headers();
   const ip = clientIp(hdrs);
-  if (!checkRateLimit(`lead:${ip}`).ok) {
+  if (!(await rateLimit("lead", ip, 5, 600)).ok) {
     return { ok: false, message: "Too many requests. Please try again shortly." };
   }
 

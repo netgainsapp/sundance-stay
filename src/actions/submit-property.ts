@@ -4,7 +4,7 @@ import { headers } from "next/headers";
 import { propertySubmissionSchema } from "@/lib/validation";
 import { prisma } from "@/lib/prisma";
 import { sendLeadNotification } from "@/lib/email";
-import { checkRateLimit } from "@/lib/rate-limit";
+import { rateLimit } from "@/lib/rate-limit-durable";
 import { clientIp } from "@/lib/request";
 import type { FormState } from "./submit-lead";
 
@@ -26,7 +26,7 @@ export async function submitProperty(_prev: FormState, formData: FormData): Prom
 
   const hdrs = await headers();
   const ip = clientIp(hdrs);
-  if (!checkRateLimit(`property:${ip}`).ok) {
+  if (!(await rateLimit("property", ip, 5, 600)).ok) {
     return { ok: false, message: "Too many requests. Please try again shortly." };
   }
 
