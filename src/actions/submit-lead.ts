@@ -45,7 +45,7 @@ export async function submitLead(_prev: FormState, formData: FormData): Promise<
       },
     });
 
-    await sendLeadNotification(`New ${data.sourceType.replace("_", " ")}`, [
+    await sendLeadNotification(`New ${data.sourceType.replaceAll("_", " ")}`, [
       `Name: ${data.visitorName}`,
       `Email: ${data.visitorEmail}`,
       `Phone: ${data.visitorPhone || "n/a"}`,

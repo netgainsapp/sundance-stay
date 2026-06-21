@@ -19,7 +19,8 @@ export function PropertySubmissionForm() {
       <Field label="Property Address" name="propertyAddress" error={state.errors?.propertyAddress} required />
       <div>
         <label htmlFor="propertyType" className="block text-sm font-medium text-charcoal">Property Type<span className="text-copper"> *</span></label>
-        <select id="propertyType" name="propertyType" required className="mt-1 w-full rounded-card border border-charcoal/20 px-3 py-2 text-sm focus:border-mountain focus:outline-none focus:ring-1 focus:ring-mountain">
+        <select id="propertyType" name="propertyType" required defaultValue="" className="mt-1 w-full rounded-card border border-charcoal/20 px-3 py-2 text-sm focus:border-mountain focus:outline-none focus:ring-1 focus:ring-mountain">
+          <option value="" disabled>Select property type</option>
           <option value="House">House</option>
           <option value="Condo">Condo</option>
           <option value="Cabin">Cabin</option>

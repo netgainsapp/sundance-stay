@@ -39,8 +39,8 @@ export default function Home() {
     <>
       <section className="relative flex min-h-[80vh] items-center overflow-hidden">
         <Image
-          src="https://images.unsplash.com/photo-1483728642387-6c3bdd6c93e5?w=2000&q=80"
-          alt="The Boulder flatirons rising above the Front Range at dusk"
+          src="https://images.unsplash.com/photo-1600104146011-ad1a8571f161?w=2000&q=80"
+          alt="The Boulder Flatirons rising above the Chautauqua meadow"
           fill
           priority
           sizes="100vw"

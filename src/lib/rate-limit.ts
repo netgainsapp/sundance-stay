@@ -6,6 +6,13 @@ const store = new Map<string, Entry>();
 
 export function checkRateLimit(ip: string): { ok: boolean } {
   const now = Date.now();
+
+  // Sweep expired entries so the map does not grow unbounded in long
+  // running processes. Cheap because the store stays small in practice.
+  for (const [key, value] of store) {
+    if (value.resetAt < now) store.delete(key);
+  }
+
   const entry = store.get(ip);
   if (!entry || entry.resetAt < now) {
     store.set(ip, { count: 1, resetAt: now + WINDOW_MS });

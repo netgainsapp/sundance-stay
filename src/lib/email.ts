@@ -2,7 +2,9 @@ import { Resend } from "resend";
 
 const resend = process.env.RESEND_API_KEY ? new Resend(process.env.RESEND_API_KEY) : null;
 const TO = process.env.LEADS_EMAIL;
-const FROM = "Sundance Stay Collective <noreply@netgains.app>";
+const FROM =
+  process.env.RESEND_FROM_ADDRESS ??
+  "Sundance Stay Collective <noreply@netgains.app>";
 
 export async function sendLeadNotification(subject: string, lines: string[]) {
   if (!resend || !TO) {

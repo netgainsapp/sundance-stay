@@ -35,7 +35,7 @@ export function StayFilters({ neighborhoods, current }: Props) {
         Neighborhood
         <select
           className={selectClass}
-          defaultValue={current.neighborhood ?? ""}
+          value={current.neighborhood ?? ""}
           onChange={(e) => onChange("neighborhood", e.target.value)}
         >
           <option value="">Any neighborhood</option>
@@ -51,7 +51,7 @@ export function StayFilters({ neighborhoods, current }: Props) {
         Property type
         <select
           className={selectClass}
-          defaultValue={current.type ?? ""}
+          value={current.type ?? ""}
           onChange={(e) => onChange("type", e.target.value)}
         >
           <option value="">Any</option>
@@ -67,7 +67,7 @@ export function StayFilters({ neighborhoods, current }: Props) {
         Guests
         <select
           className={selectClass}
-          defaultValue={current.guests ?? ""}
+          value={current.guests ?? ""}
           onChange={(e) => onChange("guests", e.target.value)}
         >
           <option value="">Any</option>
@@ -83,7 +83,7 @@ export function StayFilters({ neighborhoods, current }: Props) {
         Bedrooms
         <select
           className={selectClass}
-          defaultValue={current.bedrooms ?? ""}
+          value={current.bedrooms ?? ""}
           onChange={(e) => onChange("bedrooms", e.target.value)}
         >
           <option value="">Any</option>
@@ -99,7 +99,7 @@ export function StayFilters({ neighborhoods, current }: Props) {
         Bathrooms
         <select
           className={selectClass}
-          defaultValue={current.bathrooms ?? ""}
+          value={current.bathrooms ?? ""}
           onChange={(e) => onChange("bathrooms", e.target.value)}
         >
           <option value="">Any</option>
