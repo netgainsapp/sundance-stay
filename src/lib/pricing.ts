@@ -2,26 +2,21 @@
  * Single source of truth for advertiser pricing. Flat fees, per festival window
  * (one time, no commission, no subscription). Ready to feed Stripe later.
  *
- * Pricing is a placement tier times a category multiplier, except the Large
- * Carousel which is category agnostic (flat price) and globally scarce.
+ * Three tiers: Standard (base listing, category multiplied), Premier (flat),
+ * and Large Carousel (flat and globally scarce).
  */
 
-export type PlacementTier =
-  | "standard"
-  | "premium"
-  | "featured_guide"
-  | "carousel";
+export type PlacementTier = "standard" | "premier" | "carousel";
 
 export type AdvertiserCategory =
   | "restaurants"
   | "services"
   | "short_term_rentals";
 
-// Base prices are the restaurants (1x) tier, in whole US dollars.
+// Base prices are the restaurants (1x) rate, in whole US dollars.
 const BASE_PRICE: Record<PlacementTier, number> = {
   standard: 299,
-  premium: 599,
-  featured_guide: 1500,
+  premier: 1500,
   carousel: 5000,
 };
 
@@ -31,10 +26,10 @@ const CATEGORY_MULTIPLIER: Record<AdvertiserCategory, number> = {
   short_term_rentals: 2,
 };
 
-// Premium placements are flat for any category; the multiplier applies only to
-// the two base listing tiers (standard, premium).
+// Premier and the Large Carousel are flat for any category; the multiplier
+// applies only to the Standard listing tier.
 const AGNOSTIC_TIERS: ReadonlySet<PlacementTier> = new Set([
-  "featured_guide",
+  "premier",
   "carousel",
 ]);
 
@@ -43,16 +38,17 @@ export const CAROUSEL_TOTAL_SLOTS = 5;
 
 export const TIER_LABEL: Record<PlacementTier, string> = {
   standard: "Standard Listing",
-  premium: "Premium Visibility",
-  featured_guide: "Featured Guide Placement",
+  premier: "Premier",
   carousel: "Large Carousel",
 };
 
 export const TIER_BLURB: Record<PlacementTier, string> = {
-  standard: "A clean profile in the directory with your details and inquiry form.",
-  premium: "Priority placement and a highlighted card so you stand out in your category.",
-  featured_guide: "Your brand woven into the editorial guides travelers actually read.",
-  carousel: "One of five rotating homepage spots seen sitewide. Maximum visibility.",
+  standard:
+    "A clean profile in the directory with your details and inquiry form.",
+  premier:
+    "Top placement and a featured profile for standout visibility across the site.",
+  carousel:
+    "One of five rotating homepage spots seen sitewide. Maximum visibility.",
 };
 
 export const CATEGORY_LABEL: Record<AdvertiserCategory, string> = {
@@ -63,16 +59,12 @@ export const CATEGORY_LABEL: Record<AdvertiserCategory, string> = {
 
 export const PLACEMENT_TIERS: PlacementTier[] = [
   "standard",
-  "premium",
-  "featured_guide",
+  "premier",
   "carousel",
 ];
 
-// The two base listing tiers a host or business chooses from.
-export const LISTING_TIERS: PlacementTier[] = ["standard", "premium"];
-
-// Premium add-on placements sold on the Advertise page.
-export const PREMIUM_PLACEMENTS: PlacementTier[] = ["featured_guide", "carousel"];
+// The listing levels a host or business chooses from.
+export const LISTING_TIERS: PlacementTier[] = ["standard", "premier"];
 
 export const ADVERTISER_CATEGORIES: AdvertiserCategory[] = [
   "restaurants",
@@ -94,7 +86,7 @@ export function isAgnosticTier(tier: PlacementTier): boolean {
   return AGNOSTIC_TIERS.has(tier);
 }
 
-/** Formats a whole-dollar amount as a clean price string, e.g. $1,198. */
+/** Formats a whole-dollar amount as a clean price string, e.g. $1,500. */
 export function formatPrice(amount: number): string {
   return `$${amount.toLocaleString("en-US")}`;
 }

@@ -42,12 +42,12 @@ const tiers = [
     emphasized: false,
   },
   {
-    name: "Premium Visibility",
-    positioning: "Priority placement for homes that deserve attention.",
-    price: priceFor("short_term_rentals", "premium"),
+    name: "Premier",
+    positioning: "Top placement and a featured profile for homes that deserve attention.",
+    price: priceFor("short_term_rentals", "premier"),
     features: [
       "Everything in Standard",
-      "Priority placement in search",
+      "Top placement in search",
       "Highlighted featured card",
       "Larger gallery",
       "Homepage eligibility",

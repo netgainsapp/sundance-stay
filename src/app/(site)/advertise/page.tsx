@@ -4,10 +4,9 @@ import { InquiryForm } from "@/components/forms/InquiryForm";
 import { pageMetadata } from "@/lib/seo";
 import {
   ADVERTISER_CATEGORIES,
-  LISTING_TIERS,
+  CATEGORY_LABEL,
   TIER_LABEL,
   TIER_BLURB,
-  CATEGORY_LABEL,
   CAROUSEL_TOTAL_SLOTS,
   priceFor,
   formatPrice,
@@ -16,7 +15,7 @@ import {
 export const metadata = pageMetadata({
   title: "Advertise with Sundance Stay Collective",
   description:
-    "Reach Festival Season visitors and Boulder area travelers. Listing tiers, featured guide placement, and a limited homepage carousel.",
+    "Reach Festival Season visitors and Boulder area travelers. Standard listings, Premier placement, and a limited homepage carousel.",
   path: "/advertise",
 });
 
@@ -31,7 +30,12 @@ function Check() {
   );
 }
 
-const featuredGuidePrice = priceFor("restaurants", "featured_guide");
+const standardByCategory = ADVERTISER_CATEGORIES.map((category) => ({
+  label: CATEGORY_LABEL[category],
+  price: priceFor(category, "standard"),
+}));
+
+const premierPrice = priceFor("restaurants", "premier");
 const carouselPrice = priceFor("restaurants", "carousel");
 
 export default function AdvertisePage() {
@@ -46,81 +50,31 @@ export default function AdvertisePage() {
       </section>
 
       <section className="mx-auto max-w-7xl px-6 py-[var(--space-section)]">
-        <SectionHeader
-          eyebrow="Listing tiers"
-          title="Pricing by business type"
-          intro="Pick a tier, priced by category. Restaurants are the base rate, services run higher, and short-term rentals are the premium tier."
-        />
-        <div className="mt-10 overflow-x-auto rounded-card border border-charcoal/10 bg-white">
-          <table className="w-full text-left text-sm">
-            <thead className="border-b border-charcoal/10 text-charcoal/60">
-              <tr>
-                <th className="px-5 py-4 font-medium">Placement</th>
-                {ADVERTISER_CATEGORIES.map((category) => (
-                  <th key={category} className="px-5 py-4 text-right font-medium">
-                    {CATEGORY_LABEL[category]}
-                  </th>
-                ))}
-              </tr>
-            </thead>
-            <tbody>
-              {LISTING_TIERS.map((tier) => (
-                <tr
-                  key={tier}
-                  className="border-b border-charcoal/5 last:border-0"
-                >
-                  <td className="px-5 py-5">
-                    <div className="font-heading text-lg text-charcoal">
-                      {TIER_LABEL[tier]}
-                    </div>
-                    <div className="mt-1 max-w-xs text-xs leading-relaxed text-charcoal/60">
-                      {TIER_BLURB[tier]}
-                    </div>
-                  </td>
-                  {ADVERTISER_CATEGORIES.map((category) => (
-                    <td
-                      key={category}
-                      className="px-5 py-5 text-right font-heading text-xl text-charcoal"
-                    >
-                      {formatPrice(priceFor(category, tier))}
-                    </td>
-                  ))}
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-        <p className="mt-4 text-xs text-charcoal/50">
-          Flat fee per festival window. Short-term rental listings are managed on
-          the List Your Home page.
-        </p>
-      </section>
-
-      <section className="mx-auto max-w-7xl px-6 py-[var(--space-section)]">
-        <SectionHeader
-          eyebrow="Premium placements"
-          title="Maximum visibility"
-          intro="Two flat rate placements at the top of the funnel, priced the same for every business type."
-        />
-        <div className="mt-12 grid gap-8 md:grid-cols-2">
+        <div className="grid gap-8 md:grid-cols-3">
+          {/* Standard */}
           <div className="flex flex-col rounded-card border border-charcoal/10 p-8">
             <h3 className="font-heading text-2xl text-charcoal">
-              {TIER_LABEL.featured_guide}
+              {TIER_LABEL.standard}
             </h3>
             <p className="mt-2 text-sm leading-relaxed text-charcoal/70">
-              {TIER_BLURB.featured_guide}
+              {TIER_BLURB.standard}
             </p>
             <p className="mt-6 font-heading text-4xl text-charcoal">
-              {formatPrice(featuredGuidePrice)}
-              <span className="ml-2 text-sm font-normal text-charcoal/50">
-                per festival window
-              </span>
+              From {formatPrice(standardByCategory[0].price)}
             </p>
+            <ul className="mt-4 space-y-1 text-sm text-charcoal/60">
+              {standardByCategory.map((row) => (
+                <li key={row.label} className="flex justify-between">
+                  <span>{row.label}</span>
+                  <span className="text-charcoal">{formatPrice(row.price)}</span>
+                </li>
+              ))}
+            </ul>
             <ul className="mt-6 flex-1 space-y-3">
               {[
-                "Your brand placed inside the editorial guides",
-                "Contextual exposure where travelers plan",
-                "Any business type, one flat rate",
+                "Directory listing with full details",
+                "Category placement",
+                "Direct inquiry form",
               ].map((b) => (
                 <li
                   key={b}
@@ -133,12 +87,50 @@ export default function AdvertisePage() {
             </ul>
             <div className="mt-8">
               <Cta href="#sponsor-inquiry" variant="secondary" className="w-full">
-                Request availability
+                Request a listing
               </Cta>
             </div>
           </div>
 
+          {/* Premier */}
           <div className="flex flex-col rounded-card border border-mountain p-8 ring-1 ring-mountain">
+            <h3 className="font-heading text-2xl text-charcoal">
+              {TIER_LABEL.premier}
+            </h3>
+            <p className="mt-2 text-sm leading-relaxed text-charcoal/70">
+              {TIER_BLURB.premier}
+            </p>
+            <p className="mt-6 font-heading text-4xl text-charcoal">
+              {formatPrice(premierPrice)}
+              <span className="ml-2 text-sm font-normal text-charcoal/50">
+                flat, any business type
+              </span>
+            </p>
+            <ul className="mt-6 flex-1 space-y-3">
+              {[
+                "Everything in Standard",
+                "Top placement and a featured profile",
+                "Highlighted across the site",
+                "One flat rate for every category",
+              ].map((b) => (
+                <li
+                  key={b}
+                  className="flex items-start gap-3 text-sm text-charcoal/80"
+                >
+                  <Check />
+                  <span>{b}</span>
+                </li>
+              ))}
+            </ul>
+            <div className="mt-8">
+              <Cta href="#sponsor-inquiry" className="w-full">
+                Request Premier
+              </Cta>
+            </div>
+          </div>
+
+          {/* Large Carousel */}
+          <div className="flex flex-col rounded-card border border-copper p-8 ring-1 ring-copper">
             <div className="flex items-center justify-between">
               <h3 className="font-heading text-2xl text-charcoal">
                 {TIER_LABEL.carousel}
@@ -178,6 +170,10 @@ export default function AdvertisePage() {
             </div>
           </div>
         </div>
+        <p className="mt-6 text-xs text-charcoal/50">
+          Flat fee per festival window. Short-term rental listings are managed on
+          the List Your Home page.
+        </p>
       </section>
 
       <section
