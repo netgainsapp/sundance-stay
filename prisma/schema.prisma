@@ -20,6 +20,18 @@ enum LeadStatus {
   closed
 }
 
+enum SponsorLevel {
+  local
+  category
+  festival
+}
+
+enum SponsorshipStatus {
+  pending
+  active
+  expired
+}
+
 model Lead {
   id           String     @id @default(cuid())
   sourceType   LeadSource
@@ -47,4 +59,20 @@ model PropertySubmission {
   description       String
   status            LeadStatus @default(new)
   createdAt         DateTime   @default(now())
+}
+
+model Sponsorship {
+  id           String            @id @default(cuid())
+  businessName String
+  contactName  String?
+  contactEmail String
+  contactPhone String?
+  level        SponsorLevel
+  placement    String
+  amountCents  Int?
+  status       SponsorshipStatus @default(pending)
+  startDate    DateTime?
+  endDate      DateTime?
+  notes        String?
+  createdAt    DateTime          @default(now())
 }
