@@ -1,0 +1,50 @@
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+enum LeadSource {
+  property_inquiry
+  business_inquiry
+  general_contact
+  sponsor_inquiry
+}
+
+enum LeadStatus {
+  new
+  contacted
+  closed
+}
+
+model Lead {
+  id           String     @id @default(cuid())
+  sourceType   LeadSource
+  propertySlug String?
+  businessSlug String?
+  visitorName  String
+  visitorEmail String
+  visitorPhone String?
+  message      String
+  status       LeadStatus @default(new)
+  createdAt    DateTime   @default(now())
+}
+
+model PropertySubmission {
+  id                String     @id @default(cuid())
+  name              String
+  email             String
+  phone             String?
+  propertyAddress   String
+  propertyType      String
+  bedrooms          Int
+  bathrooms         Int
+  capacity          Int
+  availabilityDates String?
+  description       String
+  status            LeadStatus @default(new)
+  createdAt         DateTime   @default(now())
+}
