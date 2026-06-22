@@ -4,6 +4,7 @@ import {
   toggleAutopublish,
   publishGeneratedPost,
   unpublishGeneratedPost,
+  generateOneNow,
 } from "@/actions/blog-admin";
 import type { GeneratedPost } from "@/generated/prisma/client";
 
@@ -52,19 +53,29 @@ export default async function AdminBlogPage() {
               : "Off. The engine writes drafts only; you publish them yourself."}
           </p>
         </div>
-        <form action={toggleAutopublish}>
-          <input type="hidden" name="enabled" value={autopublish ? "false" : "true"} />
-          <button
-            type="submit"
-            className={`rounded-card px-4 py-2 text-sm font-medium transition-colors ${
-              autopublish
-                ? "border border-charcoal/20 text-charcoal/70 hover:bg-charcoal/5"
-                : "bg-mountain text-white hover:bg-charcoal"
-            }`}
-          >
-            {autopublish ? "Turn off" : "Turn on"}
-          </button>
-        </form>
+        <div className="flex items-center gap-3">
+          <form action={generateOneNow}>
+            <button
+              type="submit"
+              className="rounded-card border border-charcoal/20 px-4 py-2 text-sm text-charcoal/70 transition-colors hover:bg-charcoal/5"
+            >
+              Generate one now
+            </button>
+          </form>
+          <form action={toggleAutopublish}>
+            <input type="hidden" name="enabled" value={autopublish ? "false" : "true"} />
+            <button
+              type="submit"
+              className={`rounded-card px-4 py-2 text-sm font-medium transition-colors ${
+                autopublish
+                  ? "border border-charcoal/20 text-charcoal/70 hover:bg-charcoal/5"
+                  : "bg-mountain text-white hover:bg-charcoal"
+              }`}
+            >
+              {autopublish ? "Turn off" : "Turn on"}
+            </button>
+          </form>
+        </div>
       </div>
 
       {posts.length === 0 && !dbError ? (

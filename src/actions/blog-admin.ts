@@ -4,11 +4,20 @@ import { revalidatePath } from "next/cache";
 import { requireAdmin } from "@/lib/admin-auth";
 import { prisma } from "@/lib/prisma";
 import { setAutopublish } from "@/lib/blog-flag";
+import { runOnce } from "@/lib/blog-engine/run";
 
 export async function toggleAutopublish(formData: FormData): Promise<void> {
   await requireAdmin();
   await setAutopublish(formData.get("enabled") === "true");
   revalidatePath("/admin/blog");
+}
+
+/** Manually runs one engine pass (seed). No-ops cleanly without a model key. */
+export async function generateOneNow(): Promise<void> {
+  await requireAdmin();
+  await runOnce();
+  revalidatePath("/admin/blog");
+  revalidatePath("/blog");
 }
 
 export async function publishGeneratedPost(formData: FormData): Promise<void> {
