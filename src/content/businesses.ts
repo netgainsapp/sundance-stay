@@ -187,6 +187,12 @@ export const businesses: Business[] = [
     services: ["Hourly sitting", "Overnight care", "Event childcare", "Travel nannies"],
     featured: true,
     tier: "featured",
+    credentials: [
+      "All sitters background checked and reference verified",
+      "CPR and pediatric first aid certified",
+      "Member, International Nanny Association",
+      "References available on request",
+    ],
   },
   {
     slug: "front-range-sitters",
@@ -203,6 +209,11 @@ export const businesses: Business[] = [
     services: ["On call sitting", "Weekend care", "Group childcare", "Mommy and me help"],
     featured: false,
     tier: "basic",
+    credentials: [
+      "Background checked sitters with verified references",
+      "CPR and first aid certified",
+      "References available on request",
+    ],
   },
 
   // pet-care
@@ -221,6 +232,12 @@ export const businesses: Business[] = [
     services: ["Dog walking", "Pet sitting", "Drop in visits", "Overnight stays"],
     featured: true,
     tier: "featured",
+    credentials: [
+      "Bonded and insured",
+      "Pet first aid and CPR certified",
+      "Member, Pet Sitters International",
+      "References available on request",
+    ],
   },
   {
     slug: "trailhead-dog-walkers",
@@ -237,6 +254,11 @@ export const businesses: Business[] = [
     services: ["Trail walks", "Group play", "Grooming", "Pet taxi"],
     featured: false,
     tier: "basic",
+    credentials: [
+      "Bonded and insured",
+      "Pet first aid certified",
+      "References available on request",
+    ],
   },
 
   // concierge

@@ -44,6 +44,10 @@ export interface Business {
   services: string[];
   featured: boolean;
   tier: Tier;
+  // Vetting credentials shown on the listing: references, licenses,
+  // affiliations, or certifications. Required for trust-sensitive categories
+  // (child care, pet care) so guests can see proof of vetting.
+  credentials?: string[];
 }
 
 export interface Neighborhood {

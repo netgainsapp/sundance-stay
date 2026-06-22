@@ -57,6 +57,12 @@ export default async function BusinessDetailPage({
         />
         <div className="absolute inset-0 bg-gradient-to-t from-charcoal/80 via-charcoal/20 to-transparent" />
         <div className="absolute bottom-0 left-0 p-6 md:p-10">
+          {business.credentials && business.credentials.length > 0 && (
+            <span className="mb-3 inline-flex items-center gap-1.5 rounded-full bg-white px-3 py-1 text-xs font-medium text-charcoal">
+              <span aria-hidden="true" className="text-mountain">&#10003;</span>
+              Vetted and credentialed
+            </span>
+          )}
           <h1 className="font-heading text-3xl text-white md:text-4xl">{business.name}</h1>
           <p className="mt-2 text-sm text-white/80">{business.serviceArea}</p>
         </div>
@@ -74,6 +80,34 @@ export default async function BusinessDetailPage({
               </p>
             ))}
           </div>
+
+          {business.credentials && business.credentials.length > 0 && (
+            <div className="mt-10 rounded-card bg-mountain/5 p-6">
+              <h2 className="font-heading text-2xl text-charcoal">
+                Credentials and vetting
+              </h2>
+              <ul className="mt-4 space-y-3">
+                {business.credentials.map((item) => (
+                  <li
+                    key={item}
+                    className="flex items-start gap-3 text-sm text-charcoal/80"
+                  >
+                    <span
+                      aria-hidden="true"
+                      className="mt-0.5 inline-flex h-4 w-4 flex-none items-center justify-center rounded-full bg-mountain/15 text-[10px] font-bold text-mountain"
+                    >
+                      &#10003;
+                    </span>
+                    <span>{item}</span>
+                  </li>
+                ))}
+              </ul>
+              <p className="mt-4 text-xs leading-relaxed text-charcoal/50">
+                Credentials are provided by the business. Please confirm current
+                licenses, certifications, and references directly before booking.
+              </p>
+            </div>
+          )}
 
           {hasContact && (
             <div className="mt-10">
