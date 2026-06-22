@@ -15,6 +15,7 @@ enum LeadSource {
   urgent_stay
   standby_host
   concierge_request
+  alerts_signup
 }
 
 enum LeadStatus {

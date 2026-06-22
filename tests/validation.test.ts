@@ -5,6 +5,7 @@ import {
   urgentStaySchema,
   standbyHostSchema,
   conciergeRequestSchema,
+  alertsSignupSchema,
 } from "@/lib/validation";
 
 describe("leadSchema", () => {
@@ -76,5 +77,17 @@ describe("conciergeRequestSchema", () => {
   it("requires festival dates", () => {
     const r = conciergeRequestSchema.safeParse({ visitorName: "Vera", visitorEmail: "vera@example.com", datesNeeded: "", website: "" });
     expect(r.success).toBe(false);
+  });
+});
+
+describe("alertsSignupSchema", () => {
+  it("accepts a valid email", () => {
+    expect(alertsSignupSchema.safeParse({ visitorEmail: "fan@example.com", website: "" }).success).toBe(true);
+  });
+  it("rejects an invalid email", () => {
+    expect(alertsSignupSchema.safeParse({ visitorEmail: "nope", website: "" }).success).toBe(false);
+  });
+  it("rejects a filled honeypot", () => {
+    expect(alertsSignupSchema.safeParse({ visitorEmail: "fan@example.com", website: "x" }).success).toBe(false);
   });
 });

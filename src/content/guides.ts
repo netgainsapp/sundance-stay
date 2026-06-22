@@ -67,6 +67,50 @@ export const guides: Guide[] = [
       "The outdoors is the soul of any Boulder visit, and the trails are remarkably accessible. The Chautauqua meadow and the paths beneath the flatirons offer everything from gentle strolls to demanding climbs, often just minutes from where you are staying. Going early rewards you with quiet trails and soft morning light across the foothills.\n\nBeyond the trails, the city has a rich cultural life. Live music, galleries, and seasonal festivals fill the calendar, and the Pearl Street Mall itself is a kind of ongoing performance, alive with street musicians and local makers. Wandering without a plan often turns up the most memorable moments.\n\nWater and wide skies add another dimension. The reservoir in South Boulder is a summer favorite for paddling and swimming, while the open spaces toward Longmont and Lafayette invite long, unhurried walks under big Colorado skies.\n\nWhen you want help shaping the days, a local concierge can arrange guided hikes, wellness sessions, or tickets to whatever is happening in town. The goal is simple, to trade the ordinary for a few experiences you will still be talking about long after you head home.",
     relatedSlugs: ["neighborhood-guide", "boulder-dining-guide"],
   },
+  {
+    slug: "skiing-from-boulder",
+    title: "Skiing from Boulder: Eldora and the Epic and Ikon Mountains",
+    excerpt:
+      "Boulder is one of the only festival towns where you can ski a real mountain in the morning and still make an evening screening.",
+    category: "Day Trips",
+    featuredImage: "https://images.unsplash.com/photo-1659730251471-1b1dfc88b491?w=1400&q=80",
+    content:
+      "Eldora is Boulder's backyard mountain. It sits about 21 miles west, a 35 to 45 minute drive up Boulder Canyon, with 680 acres, ten lifts, and the Woodward terrain parks. It is a proud Ikon Pass partner with no blackout dates, it is one of the best places in Colorado to learn, and crucially, getting there does not involve the Interstate 70 traffic that bogs down the famous resorts. You can even leave the car behind and take the seasonal RTD ski bus from 14th and Walnut for a few dollars round trip.\n\nIf you want bigger terrain, the legendary resorts are a longer haul. On the Ikon Pass, Winter Park and Copper Mountain run roughly 1.5 to 2 hours away. On the Epic Pass, Keystone, Breckenridge, and Vail are about 1.5 to 2.5 hours west on Interstate 70. All of them are spectacular, but weekend traffic and mountain weather are real, so leave early and keep an eye on conditions over Berthoud Pass.\n\nA quick way to think about passes: Eldora is on Ikon, the big Summit County and Vail Valley names split between Epic, which covers Vail, Beaver Creek, Breckenridge, and Keystone, and Ikon, which covers Winter Park, Copper, Steamboat, and Arapahoe Basin. If you only have a single day around the festival, Eldora wins on time every time.\n\nYou can rent gear in town, and our concierge can arrange a driver and lift logistics so a ski morning still leaves you the afternoon for a film. Pack warm layers, sunscreen for the high altitude sun, and expect to feel the elevation.",
+    relatedSlugs: ["nederland-peak-to-peak", "transportation-guide"],
+  },
+  {
+    slug: "nederland-peak-to-peak",
+    title: "Nederland and the Peak to Peak Byway",
+    excerpt:
+      "A funky mountain town and one of Colorado's great scenic drives, both a half hour up the canyon from Boulder.",
+    category: "Day Trips",
+    featuredImage: "https://images.unsplash.com/photo-1516644267149-681fb9f0624c?w=1400&q=80",
+    content:
+      "Just 17 miles west of Boulder on Highway 119 through Boulder Canyon, Nederland, or Ned to locals, is a deliberately unpolished mountain town at 8,230 feet. It rewards a slow morning of coffee, live music, and a spin on the Carousel of Happiness, a hand carved 1910 carousel of 56 whimsical animals that one man spent 26 years restoring before the town raised the money to give it a home.\n\nNederland anchors the southern end of the Peak to Peak Scenic Byway, Highway 72, which winds north toward Estes Park and the eastern gateway of Rocky Mountain National Park. It is one of the most beautiful drives in the state. Along the way you can stop at Barker Reservoir, take in the Indian Peaks Wilderness, and soak up long mountain views, making a full and unforgettable day of it.\n\nThe town also sits about five miles from Eldora, so a ski morning and a Nederland afternoon pair naturally. In winter the canyon and byway are scenic but winding, so check road conditions, carry traction, and give yourself extra time.\n\nIf you would rather not drive the mountain roads yourself, our concierge can arrange a driver for the day so you can simply enjoy the scenery.",
+    relatedSlugs: ["skiing-from-boulder", "local-experiences-guide"],
+  },
+  {
+    slug: "january-in-boulder",
+    title: "January in Boulder: Altitude, Weather, and What to Pack",
+    excerpt:
+      "Everything you need to feel good at a mile high festival in the heart of winter.",
+    category: "Plan Your Trip",
+    featuredImage: "https://images.unsplash.com/photo-1600104146011-ad1a8571f161?w=1400&q=80",
+    content:
+      "Boulder sits at about 5,430 feet, higher than most visitors are used to, and the mountains you may visit climb far higher. The altitude is easy to underestimate. Drink more water than feels necessary, go easy on alcohol your first night, and expect to breathe harder on a hike. Most people adjust within a day or two.\n\nJanuary here is cold but bright. Boulder gets a remarkable amount of winter sunshine, and the days swing widely, frigid in the morning and mild by afternoon. Snow comes and goes, and the roads in town clear quickly, but build in a weather buffer for any drive into the mountains, where conditions change fast.\n\nThe high altitude sun is strong even in the dead of winter, so sunscreen and lip balm earn their place in your bag. Sunglasses help on bright snowy days.\n\nFor packing, think warm layers, a true winter coat, a hat and gloves, and waterproof boots with good grip for icy sidewalks. Bring something a little nicer for evenings out around Pearl Street, and if you plan to ski, you can rent everything you need in town rather than hauling it.",
+    relatedSlugs: ["transportation-guide", "skiing-from-boulder"],
+  },
+  {
+    slug: "rest-day-hikes",
+    title: "Rest Day Hikes and Things to Do Between Screenings",
+    excerpt:
+      "How to fill the hours between films with the trails, coffee, and corners that make Boulder, Boulder.",
+    category: "Local Experiences",
+    featuredImage: "https://images.unsplash.com/photo-1653250947541-756cf6d786f4?w=1400&q=80",
+    content:
+      "Chautauqua Park is the classic outing. Take the meadow trail for an easy walk under the Flatirons, or push up the Royal Arch or Bear Peak routes if you want to earn your dinner. Arrive early for parking and for the quiet, soft light that makes the foothills glow.\n\nCloser to town, Mount Sanitas is a short steep workout with big views over the city, and the flat Boulder Creek Path is perfect for a gentle stroll or a coffee walk. Pearl Street rewards an unhurried browse, with bookshops, makers, and street performers along the brick.\n\nWhen the weather turns, stay warm indoors with the galleries of the Hill and the NoBo Art District, the shops downtown, and a long lunch at one of the Pearl Street standbys.\n\nMost of all, build in downtime. Festival days run long, and an easy morning hike or a slow coffee is often what people remember most about a Boulder trip.",
+    relatedSlugs: ["skiing-from-boulder", "neighborhood-guide"],
+  },
 ];
 
 export const getGuide = (slug: string) => guides.find((g) => g.slug === slug);

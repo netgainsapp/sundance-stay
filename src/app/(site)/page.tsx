@@ -11,6 +11,7 @@ import { getServiceCategory } from "@/content/services";
 import { latestGuides } from "@/content/guides";
 import { activeSponsors } from "@/content/sponsors";
 import { getBusiness } from "@/content/businesses";
+import { AlertsSignupForm } from "@/components/forms/AlertsSignupForm";
 import { pageMetadata, organizationJsonLd } from "@/lib/seo";
 import { SITE } from "@/lib/site";
 
@@ -171,6 +172,24 @@ export default function Home() {
           {latestGuides(4).map((guide) => (
             <GuideCard key={guide.slug} guide={guide} />
           ))}
+        </div>
+      </section>
+
+      <section className="mx-auto max-w-7xl px-6 py-[var(--space-section)]">
+        <div className="flex flex-col items-start gap-6 rounded-card border border-charcoal/10 bg-sand/20 px-8 py-10 md:flex-row md:items-center md:justify-between md:px-12">
+          <div>
+            <p className="text-xs font-medium uppercase tracking-[0.2em] text-copper">
+              Festival lodging alerts
+            </p>
+            <h2 className="mt-2 font-heading text-2xl text-charcoal md:text-3xl">
+              Be first to know when homes open
+            </h2>
+            <p className="mt-2 max-w-xl text-sm leading-relaxed text-charcoal/70">
+              Lodging is tight during Festival Season. Drop your email and we will
+              alert you when stays and last-minute homes become available.
+            </p>
+          </div>
+          <AlertsSignupForm />
         </div>
       </section>
 

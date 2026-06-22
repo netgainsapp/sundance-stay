@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { SectionHeader } from "@/components/ui/SectionHeader";
 import { AreaMap } from "@/components/neighborhoods/AreaMap";
+import { NeighborhoodQuiz } from "@/components/neighborhoods/NeighborhoodQuiz";
 import { neighborhoods } from "@/content/neighborhoods";
 import { propertiesByNeighborhood } from "@/content/properties";
 import { pageMetadata } from "@/lib/seo";
@@ -35,6 +36,19 @@ export default function NeighborhoodsPage() {
               </a>
             ))}
           </div>
+        </div>
+      </section>
+
+      <section className="mx-auto max-w-7xl px-6 pb-[var(--space-section)]">
+        <SectionHeader
+          eyebrow="Not sure where to stay"
+          title="Find your neighborhood"
+          intro="Answer three quick questions and we will point you to the area that fits your trip."
+        />
+        <div className="mt-10 max-w-3xl">
+          <NeighborhoodQuiz
+            neighborhoods={neighborhoods.map((n) => ({ slug: n.slug, name: n.name }))}
+          />
         </div>
       </section>
 
