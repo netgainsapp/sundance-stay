@@ -3,8 +3,14 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { SectionHeader } from "@/components/ui/SectionHeader";
 import { GuideCard } from "@/components/cards/GuideCard";
+import { ArticleBody } from "@/components/content/ArticleBody";
+import { JsonLd } from "@/components/seo/JsonLd";
 import { guides, getGuide } from "@/content/guides";
-import { pageMetadata } from "@/lib/seo";
+import {
+  pageMetadata,
+  articleJsonLd,
+  breadcrumbJsonLd,
+} from "@/lib/seo";
 
 export function generateStaticParams() {
   return guides.map((g) => ({ slug: g.slug }));
@@ -41,13 +47,27 @@ export default async function GuideDetailPage({
   const guide = getGuide(slug);
   if (!guide) notFound();
 
-  const blocks = guide.content.trim().split(/\n\n+/);
   const related = guide.relatedSlugs
     .map((s) => getGuide(s))
     .filter((g): g is NonNullable<typeof g> => Boolean(g));
 
   return (
     <section className="mx-auto max-w-7xl px-6 py-[var(--space-section)]">
+      <JsonLd
+        data={[
+          articleJsonLd({
+            title: guide.title,
+            description: guide.excerpt,
+            path: `/guides/${guide.slug}`,
+            image: guide.featuredImage,
+          }),
+          breadcrumbJsonLd([
+            { name: "Home", path: "/" },
+            { name: "Guides", path: "/guides" },
+            { name: guide.title, path: `/guides/${guide.slug}` },
+          ]),
+        ]}
+      />
       <div className="relative aspect-[21/9] w-full overflow-hidden rounded-card">
         <Image
           src={guide.featuredImage}
@@ -69,48 +89,7 @@ export default async function GuideDetailPage({
       </div>
 
       <article className="mx-auto mt-12 max-w-prose">
-        {blocks.map((block, i) => {
-          const trimmed = block.trim();
-          if (trimmed.startsWith("## ")) {
-            return (
-              <h2
-                key={i}
-                className="mt-12 font-heading text-2xl text-charcoal first:mt-0"
-              >
-                {trimmed.slice(3).trim()}
-              </h2>
-            );
-          }
-          const lines = trimmed.split(/\n/);
-          if (lines.every((l) => l.trim().startsWith("- "))) {
-            return (
-              <ul key={i} className="mt-5 space-y-2">
-                {lines.map((l, j) => (
-                  <li
-                    key={j}
-                    className="flex items-start gap-3 leading-relaxed text-charcoal/80"
-                  >
-                    <span
-                      aria-hidden="true"
-                      className="mt-2 inline-block h-1.5 w-1.5 shrink-0 rounded-full bg-copper"
-                    />
-                    <span>{l.trim().slice(2)}</span>
-                  </li>
-                ))}
-              </ul>
-            );
-          }
-          return (
-            <p
-              key={i}
-              className={`leading-relaxed text-charcoal/80 ${
-                i === 0 ? "text-lg" : "mt-5"
-              }`}
-            >
-              {trimmed}
-            </p>
-          );
-        })}
+        <ArticleBody content={guide.content} />
 
         <div className="mt-12 rounded-card bg-sand/20 p-6 text-center">
           <p className="text-sm text-charcoal/70">

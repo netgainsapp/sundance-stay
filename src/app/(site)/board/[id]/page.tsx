@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import { prisma } from "@/lib/prisma";
 import { currentBoardUserId } from "@/lib/board-auth";
 import { StartConversationForm } from "@/components/forms/StartConversationForm";
+import { ReportForm } from "@/components/forms/ReportForm";
 import { pageMetadata } from "@/lib/seo";
 import type { BoardPost } from "@/generated/prisma/client";
 
@@ -134,6 +135,10 @@ export default async function BoardPostPage({
           </>
         )}
       </div>
+
+      {userId && !isAuthor && (
+        <ReportForm targetType="post" targetId={post.id} />
+      )}
     </section>
   );
 }

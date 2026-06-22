@@ -85,6 +85,23 @@ export interface Guide {
   relatedSlugs: string[];
 }
 
+export interface BlogPost {
+  slug: string;
+  title: string;
+  excerpt: string;
+  category: string;
+  featuredImage: string;
+  // Markdown-lite: blank-line separated blocks, "## " headings, "- " bullets.
+  content: string;
+  author: string;
+  // ISO date string, e.g. "2026-06-22".
+  publishedAt: string;
+  tags?: string[];
+  relatedSlugs?: string[];
+  // Optional FAQ pairs, rendered on the page and emitted as FAQPage JSON-LD.
+  faqs?: { q: string; a: string }[];
+}
+
 export interface Sponsor {
   businessSlug: string;
   level: "local" | "category" | "festival";

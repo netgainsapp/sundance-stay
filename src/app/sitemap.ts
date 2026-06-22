@@ -3,6 +3,7 @@ import { SITE } from "@/lib/site";
 import { properties } from "@/content/properties";
 import { businesses } from "@/content/businesses";
 import { guides } from "@/content/guides";
+import { blogPosts } from "@/content/blog";
 import { serviceCategories } from "@/content/services";
 
 export default function sitemap(): MetadataRoute.Sitemap {
@@ -16,6 +17,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/concierge",
     "/list-your-home",
     "/guides",
+    "/blog",
     "/advertise",
     "/contact",
   ];
@@ -23,6 +25,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   for (const p of properties) urls.push({ url: `${base}/stay/${p.slug}` });
   for (const b of businesses) urls.push({ url: `${base}/business/${b.slug}` });
   for (const g of guides) urls.push({ url: `${base}/guides/${g.slug}` });
+  for (const p of blogPosts) urls.push({ url: `${base}/blog/${p.slug}` });
   for (const c of serviceCategories) urls.push({ url: `${base}/services/${c.slug}` });
   return urls;
 }

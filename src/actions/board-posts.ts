@@ -7,7 +7,7 @@ import { prisma } from "@/lib/prisma";
 import { sendLeadNotification } from "@/lib/email";
 import { rateLimit } from "@/lib/rate-limit-durable";
 import { clientIp } from "@/lib/request";
-import { currentBoardUserId } from "@/lib/board-auth";
+import { currentBoardUserId, isBoardUserSuspended } from "@/lib/board-auth";
 
 export type PostState = { ok: boolean; message?: string; errors?: Record<string, string> };
 
@@ -18,6 +18,9 @@ export async function submitBoardPost(
   const userId = await currentBoardUserId();
   if (!userId) {
     return { ok: false, message: "Please sign in to post." };
+  }
+  if (await isBoardUserSuspended(userId)) {
+    return { ok: false, message: "Your account is restricted. Contact support." };
   }
 
   const parsed = boardPostSchema.safeParse(Object.fromEntries(formData.entries()));

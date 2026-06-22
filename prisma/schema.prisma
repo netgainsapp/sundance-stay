@@ -53,6 +53,22 @@ enum ThreadStatus {
   closed
 }
 
+enum BoardUserStatus {
+  active
+  suspended
+}
+
+enum ReportTargetType {
+  post
+  thread
+}
+
+enum ReportStatus {
+  open
+  reviewed
+  dismissed
+}
+
 model Lead {
   id           String     @id @default(cuid())
   sourceType   LeadSource
@@ -90,12 +106,26 @@ model BoardUser {
   id              String           @id @default(cuid())
   email           String           @unique
   name            String?
+  status          BoardUserStatus  @default(active)
   createdAt       DateTime         @default(now())
   posts           BoardPost[]
   tokens          MagicLinkToken[]
   threadsStarted  Thread[]         @relation("ThreadInitiator")
   threadsReceived Thread[]         @relation("ThreadRecipient")
   messages        Message[]        @relation("MessageSender")
+}
+
+// A user-submitted report of a post or conversation, for admin moderation.
+model Report {
+  id         String           @id @default(cuid())
+  targetType ReportTargetType
+  targetId   String
+  reporterId String?
+  reason     String
+  status     ReportStatus     @default(open)
+  createdAt  DateTime         @default(now())
+
+  @@index([status])
 }
 
 model MagicLinkToken {

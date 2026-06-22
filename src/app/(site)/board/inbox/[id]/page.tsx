@@ -3,6 +3,7 @@ import { notFound, redirect } from "next/navigation";
 import { prisma } from "@/lib/prisma";
 import { currentBoardUserId } from "@/lib/board-auth";
 import { MessageReplyForm } from "@/components/forms/MessageReplyForm";
+import { ReportForm } from "@/components/forms/ReportForm";
 import { pageMetadata } from "@/lib/seo";
 
 export const dynamic = "force-dynamic";
@@ -110,6 +111,8 @@ export default async function ThreadPage({
         Keep the conversation here until you are comfortable. Never send payment
         for a stay through this chat.
       </p>
+
+      <ReportForm targetType="thread" targetId={thread.id} />
     </section>
   );
 }

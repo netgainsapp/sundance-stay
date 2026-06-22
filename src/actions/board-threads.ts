@@ -8,7 +8,7 @@ import { prisma } from "@/lib/prisma";
 import { sendBoardMessageAlert } from "@/lib/email";
 import { rateLimit } from "@/lib/rate-limit-durable";
 import { clientIp } from "@/lib/request";
-import { currentBoardUserId } from "@/lib/board-auth";
+import { currentBoardUserId, isBoardUserSuspended } from "@/lib/board-auth";
 
 export type MsgState = { ok: boolean; message?: string; error?: string };
 
@@ -34,6 +34,9 @@ export async function startThread(
 ): Promise<MsgState> {
   const userId = await currentBoardUserId();
   if (!userId) return { ok: false, error: "Please sign in to start a conversation." };
+  if (await isBoardUserSuspended(userId)) {
+    return { ok: false, error: "Your account is restricted." };
+  }
 
   const { body, spam, error } = parseBody(formData);
   if (spam) return { ok: true, message: "Sent." };
@@ -85,6 +88,9 @@ export async function sendMessage(
 ): Promise<MsgState> {
   const userId = await currentBoardUserId();
   if (!userId) return { ok: false, error: "Please sign in." };
+  if (await isBoardUserSuspended(userId)) {
+    return { ok: false, error: "Your account is restricted." };
+  }
 
   const { body, spam, error } = parseBody(formData);
   if (spam) return { ok: true };

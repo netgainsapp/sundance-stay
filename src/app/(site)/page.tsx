@@ -12,7 +12,8 @@ import { latestGuides } from "@/content/guides";
 import { activeSponsors } from "@/content/sponsors";
 import { getBusiness } from "@/content/businesses";
 import { AlertsSignupForm } from "@/components/forms/AlertsSignupForm";
-import { pageMetadata, organizationJsonLd } from "@/lib/seo";
+import { pageMetadata, organizationJsonLd, websiteJsonLd } from "@/lib/seo";
+import { JsonLd } from "@/components/seo/JsonLd";
 import { SITE } from "@/lib/site";
 
 export const metadata = pageMetadata({
@@ -214,12 +215,7 @@ export default function Home() {
         </div>
       </section>
 
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify(organizationJsonLd()),
-        }}
-      />
+      <JsonLd data={[organizationJsonLd(), websiteJsonLd()]} />
     </>
   );
 }
