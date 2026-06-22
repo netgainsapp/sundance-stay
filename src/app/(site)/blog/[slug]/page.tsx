@@ -1,8 +1,8 @@
-import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { SectionHeader } from "@/components/ui/SectionHeader";
 import { BlogCard } from "@/components/cards/BlogCard";
+import { BlogCover } from "@/components/blog/BlogCover";
 import { ArticleBody } from "@/components/content/ArticleBody";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { getBlogPost } from "@/content/blog";
@@ -85,14 +85,7 @@ export default async function BlogPostPage({
       <JsonLd data={structured} />
 
       <div className="relative aspect-[21/9] w-full overflow-hidden rounded-card">
-        <Image
-          src={post.featuredImage}
-          alt={post.title}
-          fill
-          priority
-          sizes="100vw"
-          className="object-cover"
-        />
+        <BlogCover seed={post.slug} className="absolute inset-0 h-full w-full" />
         <div className="absolute inset-0 bg-gradient-to-t from-charcoal/85 via-charcoal/40 to-transparent" />
         <div className="absolute inset-x-0 bottom-0 p-6 md:p-10">
           <p className="mb-3 text-xs font-medium uppercase tracking-[0.2em] text-copper">

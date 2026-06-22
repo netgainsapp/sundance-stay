@@ -1,5 +1,5 @@
-import Image from "next/image";
 import Link from "next/link";
+import { BlogCover } from "@/components/blog/BlogCover";
 import type { BlogPost } from "@/content/types";
 
 function formatDate(iso: string): string {
@@ -18,12 +18,9 @@ export function BlogCard({ post }: { post: BlogPost }) {
       className="group flex flex-col overflow-hidden rounded-card border border-charcoal/10 transition-colors hover:border-mountain"
     >
       <div className="relative aspect-[16/9] w-full overflow-hidden">
-        <Image
-          src={post.featuredImage}
-          alt={post.title}
-          fill
-          sizes="(max-width:768px) 100vw, 33vw"
-          className="object-cover transition-transform duration-500 group-hover:scale-105"
+        <BlogCover
+          seed={post.slug}
+          className="absolute inset-0 h-full w-full transition-transform duration-500 group-hover:scale-105"
         />
       </div>
       <div className="flex flex-1 flex-col p-6">
