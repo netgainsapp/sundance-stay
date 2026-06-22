@@ -3,7 +3,6 @@ import type { Property } from "@/content/types";
 export const properties: Property[] = [
   {
     slug: "pearl-street-penthouse",
-    licenseNumber: "FLRL-2027-0142",
     bookingUrl: "https://www.airbnb.com/",
     title: "Pearl Street Penthouse",
     description:
@@ -51,7 +50,6 @@ export const properties: Property[] = [
   },
   {
     slug: "chautauqua-trail-cottage",
-    licenseNumber: "FLRL-2027-0207",
     bookingUrl: "https://www.vrbo.com/",
     title: "Chautauqua Trail Cottage",
     description:
@@ -94,7 +92,6 @@ export const properties: Property[] = [
   },
   {
     slug: "north-boulder-artist-loft",
-    licenseNumber: "FLRL-2027-0388",
     bookingUrl: "https://www.airbnb.com/",
     title: "North Boulder Artist Loft",
     description:
@@ -138,7 +135,6 @@ export const properties: Property[] = [
   {
     slug: "south-boulder-foothills-home",
     shortNotice: true,
-    licenseNumber: "FLRL-2027-0455",
     title: "South Boulder Foothills Home",
     description:
       "Backing directly onto open space, this spacious family home offers immediate access to trails and the reservoir. The great room opens onto a deck with wide Front Range views, ideal for gathering after a day outdoors. With room for the whole group, it balances comfort and a true sense of place.",

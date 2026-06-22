@@ -202,23 +202,19 @@ export default function ListYourHomePage() {
             Licensing and compliance
           </h3>
           <p className="mt-3 max-w-3xl text-sm leading-relaxed text-charcoal/70">
-            The City of Boulder created a Festival Lodging Rental License for
-            renting a home during approved festival events, including the 2027
-            Sundance Film Festival, and it does not require the home to be your
-            primary residence. Boulder requires your license number to appear on
-            any listing, so we ask for it above and display it on your page. Hosts
-            are responsible for their own licensing, taxes, and compliance. Learn
-            more through the{" "}
+            Boulder area short term rentals may require a license. Hosts are
+            responsible for their own licensing, taxes, and compliance, and we
+            encourage you to confirm the current requirements before listing. You
+            can learn more through the{" "}
             <a
-              href="https://bouldercolorado.gov/services/rental-licensing-festival-lodging-rental-license"
+              href="https://bouldercolorado.gov/services/short-term-rental-licensing"
               target="_blank"
               rel="noopener noreferrer"
               className="text-mountain underline"
             >
-              City of Boulder Festival Lodging Rental License
+              City of Boulder short term rental licensing
             </a>{" "}
-            resource. Homes outside the City of Boulder follow their own town or
-            county rules.
+            resource.
           </p>
         </div>
       </section>

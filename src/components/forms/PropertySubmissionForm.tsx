@@ -34,7 +34,6 @@ export function PropertySubmissionForm() {
       <Field label="Sleeps" name="capacity" type="number" min={1} error={state.errors?.capacity} required />
       <Field label="Availability Dates" name="availabilityDates" error={state.errors?.availabilityDates} />
       <Field label="Booking link (Airbnb, Vrbo, or your site)" name="bookingUrl" type="url" error={state.errors?.bookingUrl} />
-      <Field label="Boulder rental license number (if you have one)" name="licenseNumber" error={state.errors?.licenseNumber} />
       <label className="flex items-start gap-3 rounded-card bg-sand/20 p-4 text-sm text-charcoal/80">
         <input
           type="checkbox"

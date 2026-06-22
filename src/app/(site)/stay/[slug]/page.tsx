@@ -110,11 +110,6 @@ export default async function PropertyPage({
               Available on short notice for last-minute festival stays
             </p>
           )}
-          {property.licenseNumber && (
-            <p className="mt-4 text-xs text-charcoal/50">
-              Boulder rental license {property.licenseNumber}
-            </p>
-          )}
 
           <p className="mt-8 text-base leading-relaxed text-charcoal/80">
             {property.description}
