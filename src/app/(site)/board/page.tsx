@@ -73,6 +73,9 @@ export default async function BoardPage({
         <div className="flex items-center gap-3 text-sm">
           {userId ? (
             <>
+              <Link href="/board/inbox" className="text-charcoal/70 underline">
+                Inbox
+              </Link>
               <Link
                 href="/board/new"
                 className="rounded-card bg-copper px-4 py-2 font-medium text-white transition-colors hover:bg-charcoal"

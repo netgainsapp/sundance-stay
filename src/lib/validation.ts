@@ -95,3 +95,10 @@ export const boardPostSchema = z.object({
   website: honeypot,
 });
 export type BoardPostInput = z.infer<typeof boardPostSchema>;
+
+// Last-Minute Board: a single in app message (first message or a reply).
+export const boardMessageSchema = z.object({
+  body: z.string().min(1, "Write a message").max(4000),
+  website: honeypot,
+});
+export type BoardMessageInput = z.infer<typeof boardMessageSchema>;

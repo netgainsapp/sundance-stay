@@ -35,3 +35,24 @@ export async function sendBoardMagicLink(to: string, url: string) {
     ].join("\n"),
   });
 }
+
+/** Alerts a board user that they have a new message, with a link to the thread. */
+export async function sendBoardMessageAlert(to: string, url: string) {
+  if (!resend) {
+    console.warn(`RESEND_API_KEY not set; message alert for ${to}: ${url}`);
+    return;
+  }
+  await resend.emails.send({
+    from: FROM,
+    to,
+    subject: "You have a new message on the Last-Minute Board",
+    text: [
+      "Someone replied to you on the Last-Minute Board.",
+      "",
+      "Open the conversation here:",
+      url,
+      "",
+      "For your safety, keep the conversation on the platform until you are ready.",
+    ].join("\n"),
+  });
+}

@@ -48,6 +48,11 @@ enum BoardPostStatus {
   removed
 }
 
+enum ThreadStatus {
+  open
+  closed
+}
+
 model Lead {
   id           String     @id @default(cuid())
   sourceType   LeadSource
@@ -82,12 +87,15 @@ model PropertySubmission {
 // Public marketplace user (a traveler or a host). Distinct from the single
 // admin operator. Authenticated by passwordless email magic link.
 model BoardUser {
-  id        String           @id @default(cuid())
-  email     String           @unique
-  name      String?
-  createdAt DateTime         @default(now())
-  posts     BoardPost[]
-  tokens    MagicLinkToken[]
+  id              String           @id @default(cuid())
+  email           String           @unique
+  name            String?
+  createdAt       DateTime         @default(now())
+  posts           BoardPost[]
+  tokens          MagicLinkToken[]
+  threadsStarted  Thread[]         @relation("ThreadInitiator")
+  threadsReceived Thread[]         @relation("ThreadRecipient")
+  messages        Message[]        @relation("MessageSender")
 }
 
 model MagicLinkToken {
@@ -112,8 +120,42 @@ model BoardPost {
   notes     String
   status    BoardPostStatus @default(pending)
   createdAt DateTime        @default(now())
+  threads   Thread[]
 
   @@index([status, type])
+}
+
+// A private conversation between the post author and one other user, scoped to
+// a single post. In Phase 3 a paid unlock will gate thread creation; the model
+// is ready for it. Contact happens in app, so emails are never exposed.
+model Thread {
+  id          String       @id @default(cuid())
+  postId      String
+  post        BoardPost    @relation(fields: [postId], references: [id], onDelete: Cascade)
+  initiatorId String
+  initiator   BoardUser    @relation("ThreadInitiator", fields: [initiatorId], references: [id], onDelete: Cascade)
+  recipientId String
+  recipient   BoardUser    @relation("ThreadRecipient", fields: [recipientId], references: [id], onDelete: Cascade)
+  status      ThreadStatus @default(open)
+  createdAt   DateTime     @default(now())
+  messages    Message[]
+
+  @@unique([postId, initiatorId])
+  @@index([recipientId])
+  @@index([initiatorId])
+}
+
+model Message {
+  id        String    @id @default(cuid())
+  threadId  String
+  thread    Thread    @relation(fields: [threadId], references: [id], onDelete: Cascade)
+  senderId  String
+  sender    BoardUser @relation("MessageSender", fields: [senderId], references: [id], onDelete: Cascade)
+  body      String
+  readAt    DateTime?
+  createdAt DateTime  @default(now())
+
+  @@index([threadId])
 }
 
 model Sponsorship {

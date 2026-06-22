@@ -2,6 +2,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { prisma } from "@/lib/prisma";
 import { currentBoardUserId } from "@/lib/board-auth";
+import { StartConversationForm } from "@/components/forms/StartConversationForm";
 import { pageMetadata } from "@/lib/seo";
 import type { BoardPost } from "@/generated/prisma/client";
 
@@ -31,6 +32,19 @@ export default async function BoardPostPage({
   const userId = await currentBoardUserId();
   const isAuthor = userId === post.authorId;
   const isNeed = post.type === "need";
+
+  let existingThreadId: string | null = null;
+  if (userId && !isAuthor) {
+    try {
+      const t = await prisma.thread.findUnique({
+        where: { postId_initiatorId: { postId: post.id, initiatorId: userId } },
+        select: { id: true },
+      });
+      existingThreadId = t?.id ?? null;
+    } catch {
+      existingThreadId = null;
+    }
+  }
 
   return (
     <section className="mx-auto max-w-3xl px-6 py-[var(--space-section)]">
@@ -90,15 +104,33 @@ export default async function BoardPostPage({
               Sign in to connect
             </Link>
           </>
+        ) : existingThreadId ? (
+          <>
+            <h2 className="font-heading text-lg text-charcoal">
+              You have a conversation going
+            </h2>
+            <p className="mt-2 text-sm leading-relaxed text-charcoal/70">
+              Pick up where you left off.
+            </p>
+            <Link
+              href={`/board/inbox/${existingThreadId}`}
+              className="mt-4 inline-flex rounded-card bg-mountain px-5 py-2.5 text-sm font-medium text-white transition-colors hover:bg-charcoal"
+            >
+              Open the conversation
+            </Link>
+          </>
         ) : (
           <>
             <h2 className="font-heading text-lg text-charcoal">
               Start a conversation
             </h2>
             <p className="mt-2 text-sm leading-relaxed text-charcoal/70">
-              Secure in app messaging is being finished. Soon a flat fee will
-              unlock a private conversation with this poster right here.
+              Send a first message to connect privately with this poster. We
+              never take a cut of the stay.
             </p>
+            <div className="mt-4">
+              <StartConversationForm postId={post.id} />
+            </div>
           </>
         )}
       </div>
