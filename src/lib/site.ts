@@ -12,6 +12,7 @@ export const SITE = {
     { label: "Last-Minute", href: "/last-minute" },
     { label: "List Your Home", href: "/list-your-home" },
     { label: "Services", href: "/services" },
+    { label: "Concierge", href: "/concierge" },
     { label: "Guides", href: "/guides" },
     { label: "Advertise", href: "/advertise" },
     { label: "Contact", href: "/contact" },

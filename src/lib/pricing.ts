@@ -54,6 +54,45 @@ export const REALTOR_SPOT_SLOTS = 1;
 export const CARE_LISTING_PRICE = 199;
 export const CARE_CATEGORIES = ["child-care", "pet-care"] as const;
 
+// Concierge packages, priced by coverage model. Flat fees for the festival
+// window. We arrange; the licensed local providers deliver.
+export type ConciergeTier = {
+  key: string;
+  label: string;
+  price: number;
+  coverage: string;
+  blurb: string;
+  emphasized?: boolean;
+};
+
+export const CONCIERGE_TIERS: ConciergeTier[] = [
+  {
+    key: "dedicated_day",
+    label: "Dedicated, Noon to Midnight",
+    price: 5000,
+    coverage: "Noon to midnight, just for you",
+    blurb:
+      "Your own concierge from noon to midnight, covering the hours that matter most during the festival.",
+  },
+  {
+    key: "shared_24_7",
+    label: "Shared 24/7",
+    price: 6000,
+    coverage: "Around the clock, shared with one other party",
+    blurb:
+      "Full around the clock coverage at a shared rate. Your concierge supports you and one other party.",
+  },
+  {
+    key: "dedicated_24_7",
+    label: "Dedicated 24/7",
+    price: 10000,
+    coverage: "Around the clock, just for you",
+    blurb:
+      "Your own concierge, available any hour for the entire festival. The highest level of service.",
+    emphasized: true,
+  },
+];
+
 export const TIER_LABEL: Record<PlacementTier, string> = {
   standard: "Standard Listing",
   premier: "Premier",

@@ -11,6 +11,7 @@ const SOURCE_TYPES = [
   "sponsor_inquiry",
   "urgent_stay",
   "standby_host",
+  "concierge_request",
 ] as const;
 
 const STATUSES = ["new", "contacted", "closed"] as const;

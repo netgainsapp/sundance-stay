@@ -4,6 +4,7 @@ import {
   propertySubmissionSchema,
   urgentStaySchema,
   standbyHostSchema,
+  conciergeRequestSchema,
 } from "@/lib/validation";
 
 describe("leadSchema", () => {
@@ -62,6 +63,18 @@ describe("standbyHostSchema", () => {
 
   it("requires area and dates available", () => {
     const r = standbyHostSchema.safeParse({ visitorName: "Helen", visitorEmail: "helen@example.com", area: "", datesAvailable: "", website: "" });
+    expect(r.success).toBe(false);
+  });
+});
+
+describe("conciergeRequestSchema", () => {
+  it("accepts a valid concierge request", () => {
+    const r = conciergeRequestSchema.safeParse({ visitorName: "VIP Vera", visitorEmail: "vera@example.com", visitorPhone: "303-555-0150", datesNeeded: "Jan 21 to Jan 31", partySize: "6", tier: "Dedicated 24/7 ($10,000)", message: "Production team, need full coverage.", website: "" });
+    expect(r.success).toBe(true);
+  });
+
+  it("requires festival dates", () => {
+    const r = conciergeRequestSchema.safeParse({ visitorName: "Vera", visitorEmail: "vera@example.com", datesNeeded: "", website: "" });
     expect(r.success).toBe(false);
   });
 });
