@@ -9,6 +9,7 @@ import {
   TIER_BLURB,
   CAROUSEL_TOTAL_SLOTS,
   REALTOR_SPOT_SLOTS,
+  CARE_LISTING_PRICE,
   priceFor,
   formatPrice,
 } from "@/lib/pricing";
@@ -222,6 +223,22 @@ export default function AdvertisePage() {
           Flat fee per festival window. Short-term rental listings are managed on
           the List Your Home page.
         </p>
+
+        <div className="mt-8 flex flex-col items-start justify-between gap-4 rounded-card bg-sand/20 p-6 md:flex-row md:items-center">
+          <div>
+            <h3 className="font-heading text-xl text-charcoal">
+              Child Care and Pet Care providers
+            </h3>
+            <p className="mt-1 text-sm leading-relaxed text-charcoal/70">
+              A flat {formatPrice(CARE_LISTING_PRICE)} listing for vetted sitters,
+              nannies, and pet care. You set and show your own rates, and list your
+              vetting credentials.
+            </p>
+          </div>
+          <span className="font-heading text-3xl text-charcoal">
+            {formatPrice(CARE_LISTING_PRICE)}
+          </span>
+        </div>
       </section>
 
       <section

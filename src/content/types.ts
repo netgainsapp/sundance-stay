@@ -48,6 +48,9 @@ export interface Business {
   // affiliations, or certifications. Required for trust-sensitive categories
   // (child care, pet care) so guests can see proof of vetting.
   credentials?: string[];
+  // The provider's own client-facing rates, shown on the listing. We do not
+  // set these. Required for care providers so guests see pricing up front.
+  rates?: string[];
 }
 
 export interface Neighborhood {

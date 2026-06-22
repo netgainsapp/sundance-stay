@@ -47,6 +47,13 @@ const AGNOSTIC_TIERS: ReadonlySet<PlacementTier> = new Set([
 export const CAROUSEL_TOTAL_SLOTS = 5;
 export const REALTOR_SPOT_SLOTS = 1;
 
+// Flat listing rate for individual care providers (child care, pet care).
+// Set below the standard services rate to grow vetted care supply. These
+// providers set and display their OWN client-facing rates; this is only what
+// they pay to be listed.
+export const CARE_LISTING_PRICE = 199;
+export const CARE_CATEGORIES = ["child-care", "pet-care"] as const;
+
 export const TIER_LABEL: Record<PlacementTier, string> = {
   standard: "Standard Listing",
   premier: "Premier",

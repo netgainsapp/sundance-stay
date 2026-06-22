@@ -193,6 +193,11 @@ export const businesses: Business[] = [
       "Member, International Nanny Association",
       "References available on request",
     ],
+    rates: [
+      "Hourly sitting from $30 per hour",
+      "Overnight care from $250 per night",
+      "Event childcare from $40 per hour",
+    ],
   },
   {
     slug: "front-range-sitters",
@@ -213,6 +218,10 @@ export const businesses: Business[] = [
       "Background checked sitters with verified references",
       "CPR and first aid certified",
       "References available on request",
+    ],
+    rates: [
+      "On call sitting from $25 per hour",
+      "Group childcare from $45 per hour",
     ],
   },
 
@@ -238,6 +247,11 @@ export const businesses: Business[] = [
       "Member, Pet Sitters International",
       "References available on request",
     ],
+    rates: [
+      "Dog walking from $25 per walk",
+      "Pet sitting from $40 per visit",
+      "Overnight from $75 per night",
+    ],
   },
   {
     slug: "trailhead-dog-walkers",
@@ -258,6 +272,11 @@ export const businesses: Business[] = [
       "Bonded and insured",
       "Pet first aid certified",
       "References available on request",
+    ],
+    rates: [
+      "Trail walks from $30 per walk",
+      "Group play from $25 per session",
+      "Pet taxi from $20 per trip",
     ],
   },
 

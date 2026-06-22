@@ -81,6 +81,22 @@ export default async function BusinessDetailPage({
             ))}
           </div>
 
+          {business.rates && business.rates.length > 0 && (
+            <>
+              <h2 className="mt-10 font-heading text-2xl text-charcoal">Rates</h2>
+              <ul className="mt-4 space-y-2">
+                {business.rates.map((rate) => (
+                  <li key={rate} className="text-sm text-charcoal/80">
+                    {rate}
+                  </li>
+                ))}
+              </ul>
+              <p className="mt-3 text-xs text-charcoal/50">
+                Rates are set by the business. Confirm current pricing directly.
+              </p>
+            </>
+          )}
+
           {business.credentials && business.credentials.length > 0 && (
             <div className="mt-10 rounded-card bg-mountain/5 p-6">
               <h2 className="font-heading text-2xl text-charcoal">
