@@ -109,6 +109,42 @@ export const neighborhoods: Neighborhood[] = [
     mapX: 84,
     mapY: 88,
   },
+  {
+    slug: "golden",
+    name: "Golden",
+    description:
+      "A historic foothills town where the Rockies meet the plains, known for Coors, Clear Creek, and a walkable Western downtown.",
+    overview:
+      "About forty minutes south of Boulder, Golden sits in Clear Creek Valley where the Rockies meet the plains. Tour the Coors brewery, the world's largest single site brewery, walk the historic Washington Avenue downtown under its famous welcome arch, tube or kayak Clear Creek, and climb Lookout Mountain to the Buffalo Bill grave. Red Rocks is only about ten miles away.",
+    highlights: ["Coors and Clear Creek", "Historic downtown", "Red Rocks nearby"],
+    image: "https://images.unsplash.com/photo-1659730251471-1b1dfc88b491?w=1200&q=80",
+    mapX: 30,
+    mapY: 84,
+  },
+  {
+    slug: "estes-park",
+    name: "Estes Park",
+    description:
+      "The eastern gateway to Rocky Mountain National Park, a classic mountain town of elk, alpine lakes, and the storied Stanley Hotel.",
+    overview:
+      "About fifty minutes north of Boulder through Lyons and the canyons, Estes Park is the eastern gateway to Rocky Mountain National Park. At 7,500 feet it is all alpine lakes, elk wandering downtown, and the shops and restaurants of Elkhorn Avenue, anchored by the storied Stanley Hotel that inspired The Shining. It makes a spectacular base or a full day escape from the festival.",
+    highlights: ["Rocky Mountain National Park", "The Stanley Hotel", "Elk and alpine lakes"],
+    image: "https://images.unsplash.com/photo-1508529196090-0a422bcdb8b3?w=1200&q=80",
+    mapX: 14,
+    mapY: 6,
+  },
+  {
+    slug: "nederland",
+    name: "Nederland",
+    description:
+      "A funky mountain town up Boulder Canyon, gateway to the Peak to Peak Byway, Eldora skiing, and the Indian Peaks.",
+    overview:
+      "Just a half hour up Boulder Canyon at 8,230 feet, Nederland is a deliberately unpolished mountain town of coffee shops, live music, and the beloved hand carved Carousel of Happiness. It anchors the Peak to Peak Scenic Byway toward Estes Park, sits about five miles from Eldora ski area, and opens onto the Indian Peaks Wilderness. A perfect mountain base or scenic day trip.",
+    highlights: ["Carousel of Happiness", "Peak to Peak Byway", "Eldora and Indian Peaks"],
+    image: "https://images.unsplash.com/photo-1516644267149-681fb9f0624c?w=1200&q=80",
+    mapX: 13,
+    mapY: 40,
+  },
 ];
 
 export const getNeighborhood = (slug: string) =>

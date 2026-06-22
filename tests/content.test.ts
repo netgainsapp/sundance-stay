@@ -6,9 +6,9 @@ import { businesses } from "@/content/businesses";
 import { sponsors } from "@/content/sponsors";
 
 describe("seed content integrity", () => {
-  it("has all nine neighborhoods with unique slugs", () => {
-    expect(neighborhoods).toHaveLength(9);
-    expect(new Set(neighborhoods.map((n) => n.slug)).size).toBe(9);
+  it("has twelve neighborhoods with unique slugs", () => {
+    expect(neighborhoods).toHaveLength(12);
+    expect(new Set(neighborhoods.map((n) => n.slug)).size).toBe(12);
   });
   it("has all eleven service categories", () => {
     expect(serviceCategories).toHaveLength(11);
