@@ -22,6 +22,9 @@ const MODEL_ARTIFACTS = [
   /\bas a language model\b/i,
   /\bin conclusion\b/i,
   /\bTBD\b/,
+  /lorem ipsum/i,
+  /\{\{/,
+  /\btodo\b/i,
 ];
 
 function wordCount(s: string): number {
@@ -72,7 +75,7 @@ export function checkPost(
 
   // 2. Brand voice: zero dashes/hyphens in prose, no overclaim, no artifacts
   if (/[–—]/.test(body)) reasons.push("contains an em or en dash");
-  if (/ - /.test(body)) reasons.push("contains a hyphen used as a dash");
+  if (/ - |--/.test(body)) reasons.push("contains a hyphen used as a dash");
   if (/[A-Za-z]-[A-Za-z]/.test(body)) reasons.push("contains a hyphenated word");
   if (post.title.length > 70) reasons.push("title over 70 characters");
   for (const re of BANNED_PHRASES) if (re.test(body)) reasons.push(`banned phrase: ${re.source}`);
@@ -85,6 +88,8 @@ export function checkPost(
   if (/[A-Za-z0-9._%+]+@[A-Za-z0-9.]+\.[A-Za-z]{2,}/.test(body)) reasons.push("contains an email address");
   if (/\b\d{3}[\s.]?\d{3}[\s.]?\d{4}\b/.test(body)) reasons.push("contains a phone number");
   if (/https?:\/\//i.test(body)) reasons.push("contains a raw URL");
+  if (/<\s*script/i.test(body)) reasons.push("contains a script tag");
+  if (/<\/?[a-z][^>]*>/i.test(body)) reasons.push("contains raw HTML");
 
   // 5. Dedupe
   if (takenSlugs.has(post.slug)) reasons.push("slug already exists");

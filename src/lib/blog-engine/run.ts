@@ -1,5 +1,6 @@
 import { prisma } from "@/lib/prisma";
 import { isAutopublishOn } from "@/lib/blog-flag";
+import { isFlagOn, BLOG_DATA_POSTS_FLAG } from "@/lib/feature-flag";
 import { blogPosts } from "@/content/blog";
 import { loadCatalog } from "./catalog";
 import { rankTopics } from "./topics";
@@ -70,7 +71,8 @@ export async function runOnce(): Promise<RunResult> {
     ...topicRows.filter((t) => t.status !== "candidate").map((t) => t.topicKey),
   ]);
 
-  const candidates = rankTopics(catalog, usedKeys);
+  const includeDataPosts = await isFlagOn(BLOG_DATA_POSTS_FLAG);
+  const candidates = rankTopics(catalog, usedKeys, includeDataPosts);
   if (candidates.length === 0) return { status: "no_topic" };
   const topic = candidates[0];
 
@@ -104,7 +106,12 @@ export async function runOnce(): Promise<RunResult> {
     usedTopicKeys: new Set(
       genPosts.filter((p) => p.status === "published").map((p) => p.topicKey),
     ),
-    recentBodies: genPosts.map((p) => p.bodyMd),
+    // Dedupe against other generated posts AND the curated file posts, so the
+    // engine never near-duplicates an existing article.
+    recentBodies: [
+      ...genPosts.map((p) => p.bodyMd),
+      ...blogPosts.map((p) => p.content),
+    ],
   });
 
   const publish = gate.ok && (await isAutopublishOn());

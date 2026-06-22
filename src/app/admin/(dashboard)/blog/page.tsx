@@ -1,7 +1,9 @@
 import { prisma } from "@/lib/prisma";
 import { isAutopublishOn } from "@/lib/blog-flag";
+import { isFlagOn, BLOG_DATA_POSTS_FLAG } from "@/lib/feature-flag";
 import {
   toggleAutopublish,
+  toggleDataPosts,
   publishGeneratedPost,
   unpublishGeneratedPost,
   generateOneNow,
@@ -19,11 +21,13 @@ function statusBadge(status: string): string {
 export default async function AdminBlogPage() {
   let posts: GeneratedPost[] = [];
   let autopublish = false;
+  let dataPosts = false;
   let dbError = false;
   try {
-    [posts, autopublish] = await Promise.all([
+    [posts, autopublish, dataPosts] = await Promise.all([
       prisma.generatedPost.findMany({ orderBy: { createdAt: "desc" }, take: 200 }),
       isAutopublishOn(),
+      isFlagOn(BLOG_DATA_POSTS_FLAG),
     ]);
   } catch {
     dbError = true;
@@ -76,6 +80,30 @@ export default async function AdminBlogPage() {
             </button>
           </form>
         </div>
+      </div>
+
+      <div className="mt-4 flex items-center justify-between rounded-card border border-charcoal/10 bg-white p-5">
+        <div>
+          <p className="font-medium text-charcoal">Data posts</p>
+          <p className="text-sm text-charcoal/60">
+            {dataPosts
+              ? "On. The engine also writes neighborhood and category posts from the catalog."
+              : "Off. Evergreen cornerstone posts only. Turn on once you want catalog-grounded posts too."}
+          </p>
+        </div>
+        <form action={toggleDataPosts}>
+          <input type="hidden" name="enabled" value={dataPosts ? "false" : "true"} />
+          <button
+            type="submit"
+            className={`rounded-card px-4 py-2 text-sm font-medium transition-colors ${
+              dataPosts
+                ? "border border-charcoal/20 text-charcoal/70 hover:bg-charcoal/5"
+                : "bg-mountain text-white hover:bg-charcoal"
+            }`}
+          >
+            {dataPosts ? "Turn off" : "Turn on"}
+          </button>
+        </form>
       </div>
 
       {posts.length === 0 && !dbError ? (

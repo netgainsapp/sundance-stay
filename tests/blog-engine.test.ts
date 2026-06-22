@@ -47,6 +47,14 @@ describe("rankTopics", () => {
       expect(topics[i - 1].score).toBeGreaterThanOrEqual(topics[i].score);
     }
   });
+  it("runs evergreen cornerstone topics first", () => {
+    expect(rankTopics(catalog)[0].postType).toBe("cornerstone");
+  });
+  it("excludes data posts when includeDataPosts is off (evergreen-first)", () => {
+    const topics = rankTopics(catalog, new Set(), false);
+    expect(topics.every((t) => t.postType === "cornerstone")).toBe(true);
+    expect(topics.some((t) => t.topicKey.startsWith("neighborhood:"))).toBe(false);
+  });
 });
 
 describe("groundTopic", () => {
@@ -168,5 +176,14 @@ describe("checkPost guardrails", () => {
     const r = checkPost(goodPost({ bodyMd: goodPost().bodyMd + "\n\nCall 303 555 0142 or visit https://example.com today." }));
     expect(r.reasons.join()).toMatch(/phone number/);
     expect(r.reasons.join()).toMatch(/raw URL/);
+  });
+  it("flags a double hyphen and template or placeholder leakage", () => {
+    const r = checkPost(goodPost({ bodyMd: goodPost().bodyMd + "\n\nlorem ipsum filler text and {{name}} here." }));
+    expect(r.reasons.join()).toMatch(/model artifact/);
+  });
+  it("flags a script tag and raw HTML", () => {
+    const r = checkPost(goodPost({ bodyMd: goodPost().bodyMd + "\n\n<script>alert(1)</script>" }));
+    expect(r.reasons.join()).toMatch(/script tag/);
+    expect(r.reasons.join()).toMatch(/raw HTML/);
   });
 });
