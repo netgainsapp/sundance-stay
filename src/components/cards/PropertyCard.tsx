@@ -18,6 +18,9 @@ export function PropertyCard({ property }: { property: Property }) {
         <p className="mt-1 text-sm text-charcoal/60">{hood?.name}, {property.city}</p>
         <p className="mt-3 text-sm leading-relaxed text-charcoal/70">{property.summary}</p>
         <p className="mt-4 text-xs uppercase tracking-wide text-charcoal/50">Sleeps {property.capacity}, {property.bedrooms} bd, {property.bathrooms} ba</p>
+        {property.licenseNumber && (
+          <p className="mt-2 text-[11px] text-charcoal/40">Licensed {property.licenseNumber}</p>
+        )}
       </div>
     </Link>
   );

@@ -40,6 +40,7 @@ export async function submitProperty(_prev: FormState, formData: FormData): Prom
         availabilityDates: d.availabilityDates || null, description: d.description,
         bookingUrl: d.bookingUrl || null,
         shortNotice: d.shortNotice === "on",
+        licenseNumber: d.licenseNumber || null,
       },
     });
 
@@ -50,6 +51,7 @@ export async function submitProperty(_prev: FormState, formData: FormData): Prom
       `Availability: ${d.availabilityDates || "n/a"}`,
       `Booking link: ${d.bookingUrl || "n/a"}`,
       `Standby host (short notice): ${d.shortNotice === "on" ? "yes" : "no"}`,
+      `Rental license: ${d.licenseNumber || "n/a"}`,
       "", d.description,
     ]);
   } catch (err) {

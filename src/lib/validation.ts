@@ -30,6 +30,7 @@ export const propertySubmissionSchema = z.object({
     .optional(),
   // Checkbox: present as "on" when checked, absent otherwise.
   shortNotice: z.string().optional(),
+  licenseNumber: z.string().max(60).optional().or(z.literal("")),
   website: honeypot,
 });
 export type PropertySubmissionInput = z.infer<typeof propertySubmissionSchema>;

@@ -63,6 +63,7 @@ model PropertySubmission {
   description       String
   bookingUrl        String?
   shortNotice       Boolean    @default(false)
+  licenseNumber     String?
   status            LeadStatus @default(new)
   createdAt         DateTime   @default(now())
 }

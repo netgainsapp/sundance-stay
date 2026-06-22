@@ -28,6 +28,10 @@ export interface Property {
   // Host accepts last-minute, festival-window stays and may vacate on short
   // notice. Surfaces this home in the standby / Last-Minute supply pool.
   shortNotice?: boolean;
+  // Boulder short-term / Festival Lodging rental license number. Boulder code
+  // requires the license number to appear in any rental advertisement, and a
+  // listing is an advertisement, so we display it when present.
+  licenseNumber?: string;
 }
 
 export interface Business {
