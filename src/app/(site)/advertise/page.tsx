@@ -62,7 +62,7 @@ export default function AdvertisePage() {
             <p className="mt-2 text-sm leading-relaxed text-charcoal/70">
               {TIER_BLURB.standard}
             </p>
-            <p className="mt-6 font-heading text-4xl text-charcoal">
+            <p className="mt-6 font-heading text-2xl text-charcoal">
               From {formatPrice(standardByCategory[0].price)}
             </p>
             <ul className="mt-4 space-y-1 text-sm text-charcoal/60">
@@ -103,7 +103,7 @@ export default function AdvertisePage() {
             <p className="mt-2 text-sm leading-relaxed text-charcoal/70">
               {TIER_BLURB.premier}
             </p>
-            <p className="mt-6 font-heading text-4xl text-charcoal">
+            <p className="mt-6 font-heading text-2xl text-charcoal">
               {formatPrice(premierPrice)}
               <span className="ml-2 text-sm font-normal text-charcoal/50">
                 flat, any business type
@@ -145,7 +145,7 @@ export default function AdvertisePage() {
             <p className="mt-2 text-sm leading-relaxed text-charcoal/70">
               {TIER_BLURB.carousel}
             </p>
-            <p className="mt-6 font-heading text-4xl text-charcoal">
+            <p className="mt-6 font-heading text-2xl text-charcoal">
               {formatPrice(carouselPrice)}
               <span className="ml-2 text-sm font-normal text-charcoal/50">
                 per festival window
@@ -186,7 +186,7 @@ export default function AdvertisePage() {
             <p className="mt-2 text-sm leading-relaxed text-white/75">
               {TIER_BLURB.realtor_spot}
             </p>
-            <p className="mt-6 font-heading text-4xl text-white">
+            <p className="mt-6 font-heading text-2xl text-white">
               {formatPrice(realtorSpotPrice)}
               <span className="ml-2 text-sm font-normal text-white/50">
                 per festival window

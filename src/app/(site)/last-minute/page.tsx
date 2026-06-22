@@ -1,9 +1,7 @@
 import { SectionHeader } from "@/components/ui/SectionHeader";
 import { Cta } from "@/components/ui/Cta";
-import { PropertyCard } from "@/components/cards/PropertyCard";
 import { UrgentStayForm } from "@/components/forms/UrgentStayForm";
 import { StandbyHostForm } from "@/components/forms/StandbyHostForm";
-import { shortNoticeProperties } from "@/content/properties";
 import { pageMetadata } from "@/lib/seo";
 
 export const metadata = pageMetadata({
@@ -20,8 +18,6 @@ const steps = [
 ];
 
 export default function LastMinutePage() {
-  const homes = shortNoticeProperties();
-
   return (
     <>
       <section className="mx-auto max-w-7xl px-6 py-[var(--space-section)]">
@@ -99,20 +95,6 @@ export default function LastMinutePage() {
           page.
         </p>
       </section>
-
-      {homes.length > 0 && (
-        <section className="mx-auto max-w-7xl px-6 pb-[var(--space-section)]">
-          <SectionHeader
-            eyebrow="Standby homes"
-            title="Homes already on the standby list"
-          />
-          <div className="mt-12 grid gap-8 md:grid-cols-2 lg:grid-cols-3">
-            {homes.map((property) => (
-              <PropertyCard key={property.slug} property={property} />
-            ))}
-          </div>
-        </section>
-      )}
 
       <section className="mx-auto max-w-7xl px-6 pb-[var(--space-section)]">
         <div className="rounded-card bg-sand/20 p-8">

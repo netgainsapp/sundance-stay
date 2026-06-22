@@ -85,7 +85,7 @@ export default function ConciergePage() {
             >
               <h3 className="font-heading text-2xl text-charcoal">{tier.label}</h3>
               <p className="mt-2 text-sm text-charcoal/60">{tier.coverage}</p>
-              <p className="mt-6 font-heading text-4xl text-charcoal">
+              <p className="mt-6 font-heading text-2xl text-charcoal">
                 {formatPrice(tier.price)}
                 <span className="ml-2 text-sm font-normal text-charcoal/50">
                   per festival window

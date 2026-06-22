@@ -41,7 +41,7 @@ export default async function GuideDetailPage({
   const guide = getGuide(slug);
   if (!guide) notFound();
 
-  const paragraphs = guide.content.split(/\n\n+/);
+  const blocks = guide.content.trim().split(/\n\n+/);
   const related = guide.relatedSlugs
     .map((s) => getGuide(s))
     .filter((g): g is NonNullable<typeof g> => Boolean(g));
@@ -69,16 +69,48 @@ export default async function GuideDetailPage({
       </div>
 
       <article className="mx-auto mt-12 max-w-prose">
-        {paragraphs.map((para, i) => (
-          <p
-            key={i}
-            className={`leading-relaxed text-charcoal/80 ${
-              i === 0 ? "text-lg" : "mt-5"
-            }`}
-          >
-            {para}
-          </p>
-        ))}
+        {blocks.map((block, i) => {
+          const trimmed = block.trim();
+          if (trimmed.startsWith("## ")) {
+            return (
+              <h2
+                key={i}
+                className="mt-12 font-heading text-2xl text-charcoal first:mt-0"
+              >
+                {trimmed.slice(3).trim()}
+              </h2>
+            );
+          }
+          const lines = trimmed.split(/\n/);
+          if (lines.every((l) => l.trim().startsWith("- "))) {
+            return (
+              <ul key={i} className="mt-5 space-y-2">
+                {lines.map((l, j) => (
+                  <li
+                    key={j}
+                    className="flex items-start gap-3 leading-relaxed text-charcoal/80"
+                  >
+                    <span
+                      aria-hidden="true"
+                      className="mt-2 inline-block h-1.5 w-1.5 shrink-0 rounded-full bg-copper"
+                    />
+                    <span>{l.trim().slice(2)}</span>
+                  </li>
+                ))}
+              </ul>
+            );
+          }
+          return (
+            <p
+              key={i}
+              className={`leading-relaxed text-charcoal/80 ${
+                i === 0 ? "text-lg" : "mt-5"
+              }`}
+            >
+              {trimmed}
+            </p>
+          );
+        })}
 
         <div className="mt-12 rounded-card bg-sand/20 p-6 text-center">
           <p className="text-sm text-charcoal/70">

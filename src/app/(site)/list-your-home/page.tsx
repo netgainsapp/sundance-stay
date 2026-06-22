@@ -144,7 +144,7 @@ export default function ListYourHomePage() {
               <p className="mt-2 text-sm leading-relaxed text-charcoal/70">
                 {tier.positioning}
               </p>
-              <p className="mt-6 font-heading text-4xl text-charcoal">
+              <p className="mt-6 font-heading text-2xl text-charcoal">
                 {formatPrice(tier.price)}
                 <span className="ml-2 text-sm font-normal text-charcoal/50">
                   per festival window
