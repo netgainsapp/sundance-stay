@@ -110,6 +110,16 @@ export function StayFilters({ neighborhoods, current }: Props) {
           ))}
         </select>
       </label>
+
+      <label className="flex items-center gap-2 text-xs font-medium uppercase tracking-wide text-charcoal/60 sm:pb-2">
+        <input
+          type="checkbox"
+          checked={current.shortNotice === "1"}
+          onChange={(e) => onChange("shortNotice", e.target.checked ? "1" : "")}
+          className="h-4 w-4 rounded border-charcoal/30 text-mountain focus:ring-mountain"
+        />
+        Short notice
+      </label>
     </div>
   );
 }

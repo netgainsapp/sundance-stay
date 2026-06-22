@@ -34,6 +34,18 @@ export function PropertySubmissionForm() {
       <Field label="Sleeps" name="capacity" type="number" min={1} error={state.errors?.capacity} required />
       <Field label="Availability Dates" name="availabilityDates" error={state.errors?.availabilityDates} />
       <Field label="Booking link (Airbnb, Vrbo, or your site)" name="bookingUrl" type="url" error={state.errors?.bookingUrl} />
+      <label className="flex items-start gap-3 rounded-card bg-sand/20 p-4 text-sm text-charcoal/80">
+        <input
+          type="checkbox"
+          name="shortNotice"
+          className="mt-0.5 h-4 w-4 flex-none rounded border-charcoal/30 text-mountain focus:ring-mountain"
+        />
+        <span>
+          Open to last-minute or festival-only stays. List me as a standby host in
+          case overflow demand comes up during the festival. No commitment, you
+          approve any match.
+        </span>
+      </label>
       <div>
         <label htmlFor="description" className="block text-sm font-medium text-charcoal">Description<span className="text-copper"> *</span></label>
         <textarea id="description" name="description" rows={4} required className="mt-1 w-full rounded-card border border-charcoal/20 px-3 py-2 text-sm focus:border-mountain focus:outline-none focus:ring-1 focus:ring-mountain" />

@@ -30,6 +30,7 @@ export default async function StayPage(props: {
   const guests = first(searchParams.guests);
   const bedrooms = first(searchParams.bedrooms);
   const bathrooms = first(searchParams.bathrooms);
+  const shortNotice = first(searchParams.shortNotice);
   const view = first(searchParams.view);
 
   const filtered = properties.filter((p) => {
@@ -38,6 +39,7 @@ export default async function StayPage(props: {
     if (guests && p.capacity < Number(guests)) return false;
     if (bedrooms && p.bedrooms < Number(bedrooms)) return false;
     if (bathrooms && p.bathrooms < Number(bathrooms)) return false;
+    if (shortNotice === "1" && !p.shortNotice) return false;
     return true;
   });
 
@@ -51,6 +53,7 @@ export default async function StayPage(props: {
     guests,
     bedrooms,
     bathrooms,
+    shortNotice,
   })) {
     if (value) {
       gridParams.set(key, value);
@@ -110,6 +113,7 @@ export default async function StayPage(props: {
                 guests,
                 bedrooms,
                 bathrooms,
+                shortNotice,
               }}
             />
           </div>

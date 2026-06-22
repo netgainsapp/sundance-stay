@@ -134,6 +134,7 @@ export const properties: Property[] = [
   },
   {
     slug: "south-boulder-foothills-home",
+    shortNotice: true,
     title: "South Boulder Foothills Home",
     description:
       "Backing directly onto open space, this spacious family home offers immediate access to trails and the reservoir. The great room opens onto a deck with wide Front Range views, ideal for gathering after a day outdoors. With room for the whole group, it balances comfort and a true sense of place.",
@@ -207,6 +208,7 @@ export const properties: Property[] = [
   },
   {
     slug: "lafayette-garden-townhome",
+    shortNotice: true,
     title: "Lafayette Garden Townhome",
     description:
       "A bright modern townhome in the heart of Lafayette, surrounded by breweries, galleries, and local cafes. The open plan living space flows to a private patio framed by raised garden beds. Comfortable and easy, it suits both weekend explorers and longer creative stays.",
@@ -280,6 +282,7 @@ export const properties: Property[] = [
   },
   {
     slug: "broomfield-skyline-condo",
+    shortNotice: true,
     title: "Broomfield Skyline Condo",
     description:
       "A sleek contemporary condo positioned conveniently between Boulder and Denver, with easy airport access. Floor to ceiling glass frames distant peaks, and the building amenities add a resort like ease to any stay. It is an ideal landing spot for travelers who want modern comfort and quick connections.",
@@ -361,3 +364,6 @@ export const featuredProperties = () =>
 
 export const propertiesByNeighborhood = (slug: string) =>
   properties.filter((p) => p.neighborhoodSlug === slug);
+
+export const shortNoticeProperties = () =>
+  properties.filter((p) => p.shortNotice);

@@ -105,6 +105,11 @@ export default async function PropertyPage({
             Sleeps {property.capacity}, {property.bedrooms} bedrooms,{" "}
             {property.bathrooms} bathrooms, {property.propertyType}
           </p>
+          {property.shortNotice && (
+            <p className="mt-4 inline-flex items-center gap-2 rounded-card bg-mountain/10 px-3 py-2 text-xs font-medium text-mountain">
+              Available on short notice for last-minute festival stays
+            </p>
+          )}
 
           <p className="mt-8 text-base leading-relaxed text-charcoal/80">
             {property.description}

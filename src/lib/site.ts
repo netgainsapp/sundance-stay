@@ -9,6 +9,7 @@ export const SITE = {
   nav: [
     { label: "Home", href: "/" },
     { label: "Stay", href: "/stay" },
+    { label: "Last-Minute", href: "/last-minute" },
     { label: "List Your Home", href: "/list-your-home" },
     { label: "Services", href: "/services" },
     { label: "Guides", href: "/guides" },

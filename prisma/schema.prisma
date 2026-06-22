@@ -12,6 +12,7 @@ enum LeadSource {
   business_inquiry
   general_contact
   sponsor_inquiry
+  urgent_stay
 }
 
 enum LeadStatus {
@@ -58,6 +59,7 @@ model PropertySubmission {
   availabilityDates String?
   description       String
   bookingUrl        String?
+  shortNotice       Boolean    @default(false)
   status            LeadStatus @default(new)
   createdAt         DateTime   @default(now())
 }

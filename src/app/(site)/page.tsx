@@ -131,6 +131,29 @@ export default function Home() {
       </section>
 
       <section className="mx-auto max-w-7xl px-6 py-[var(--space-section)]">
+        <div className="flex flex-col items-start justify-between gap-6 rounded-card bg-mountain px-8 py-10 text-white md:flex-row md:items-center md:px-12">
+          <div>
+            <p className="text-xs font-medium uppercase tracking-[0.2em] text-sand">
+              Just in case
+            </p>
+            <h2 className="mt-2 font-heading text-2xl text-white md:text-3xl">
+              Everything booked? We keep a backup.
+            </h2>
+            <p className="mt-2 max-w-xl text-sm leading-relaxed text-white/85">
+              When Festival Season fills up, we keep a standby list of Boulder
+              homes for last-minute needs. Tell us what you need and we move fast.
+            </p>
+          </div>
+          <Link
+            href="/last-minute"
+            className="inline-flex flex-none items-center justify-center rounded-card bg-white px-7 py-3 text-sm font-medium text-charcoal transition-colors hover:bg-sand"
+          >
+            Last-minute stays
+          </Link>
+        </div>
+      </section>
+
+      <section className="mx-auto max-w-7xl px-6 py-[var(--space-section)]">
         <SectionHeader
           eyebrow="Guides"
           title="Plan your Festival Season trip"

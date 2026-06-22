@@ -25,6 +25,9 @@ export interface Property {
   // Optional direct booking link to the host's own channel (Airbnb, Vrbo, or
   // their own site). We funnel demand there; we never process the booking.
   bookingUrl?: string;
+  // Host accepts last-minute, festival-window stays and may vacate on short
+  // notice. Surfaces this home in the standby / Last-Minute supply pool.
+  shortNotice?: boolean;
 }
 
 export interface Business {

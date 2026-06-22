@@ -9,6 +9,7 @@ const SOURCE_TYPES = [
   "business_inquiry",
   "general_contact",
   "sponsor_inquiry",
+  "urgent_stay",
 ] as const;
 
 const STATUSES = ["new", "contacted", "closed"] as const;

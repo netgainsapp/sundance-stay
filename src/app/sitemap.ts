@@ -10,6 +10,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const staticRoutes = [
     "",
     "/stay",
+    "/last-minute",
     "/services",
     "/list-your-home",
     "/guides",
