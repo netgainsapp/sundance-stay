@@ -8,6 +8,7 @@ import {
   TIER_LABEL,
   TIER_BLURB,
   CAROUSEL_TOTAL_SLOTS,
+  REALTOR_SPOT_SLOTS,
   priceFor,
   formatPrice,
 } from "@/lib/pricing";
@@ -37,6 +38,7 @@ const standardByCategory = ADVERTISER_CATEGORIES.map((category) => ({
 
 const premierPrice = priceFor("restaurants", "premier");
 const carouselPrice = priceFor("restaurants", "carousel");
+const realtorSpotPrice = priceFor("realtors", "realtor_spot");
 
 export default function AdvertisePage() {
   return (
@@ -50,7 +52,7 @@ export default function AdvertisePage() {
       </section>
 
       <section className="mx-auto max-w-7xl px-6 py-[var(--space-section)]">
-        <div className="grid gap-8 md:grid-cols-3">
+        <div className="grid gap-8 md:grid-cols-2 xl:grid-cols-4">
           {/* Standard */}
           <div className="flex flex-col rounded-card border border-charcoal/10 p-8">
             <h3 className="font-heading text-2xl text-charcoal">
@@ -167,6 +169,52 @@ export default function AdvertisePage() {
               <Cta href="#sponsor-inquiry" className="w-full">
                 Reserve a slot
               </Cta>
+            </div>
+          </div>
+
+          {/* Realtor Spotlight */}
+          <div className="flex flex-col rounded-card border border-charcoal bg-charcoal p-8 text-white">
+            <div className="flex items-center justify-between">
+              <h3 className="font-heading text-2xl text-white">
+                {TIER_LABEL.realtor_spot}
+              </h3>
+              <span className="rounded-full bg-sand px-3 py-1 text-xs font-medium text-charcoal">
+                {REALTOR_SPOT_SLOTS} spot only
+              </span>
+            </div>
+            <p className="mt-2 text-sm leading-relaxed text-white/75">
+              {TIER_BLURB.realtor_spot}
+            </p>
+            <p className="mt-6 font-heading text-4xl text-white">
+              {formatPrice(realtorSpotPrice)}
+              <span className="ml-2 text-sm font-normal text-white/50">
+                per festival window
+              </span>
+            </p>
+            <ul className="mt-6 flex-1 space-y-3">
+              {[
+                "The only realtor placement on the site",
+                "Exposure to festival visitors and home buyers",
+                "Realtors can also take a Standard or Premier listing",
+              ].map((b) => (
+                <li key={b} className="flex items-start gap-3 text-sm text-white/85">
+                  <span
+                    aria-hidden="true"
+                    className="mt-1 inline-flex h-4 w-4 flex-none items-center justify-center rounded-full bg-white/15 text-[10px] font-bold text-white"
+                  >
+                    &#10003;
+                  </span>
+                  <span>{b}</span>
+                </li>
+              ))}
+            </ul>
+            <div className="mt-8">
+              <a
+                href="#sponsor-inquiry"
+                className="inline-flex w-full items-center justify-center rounded-card bg-white px-6 py-3 text-sm font-medium text-charcoal transition-colors hover:bg-sand"
+              >
+                Claim the realtor spot
+              </a>
             </div>
           </div>
         </div>

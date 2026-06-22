@@ -2,44 +2,56 @@
  * Single source of truth for advertiser pricing. Flat fees, per festival window
  * (one time, no commission, no subscription). Ready to feed Stripe later.
  *
- * Three tiers: Standard (base listing, category multiplied), Premier (flat),
- * and Large Carousel (flat and globally scarce).
+ * Tiers: Standard (base listing, category multiplied), Premier (flat), Large
+ * Carousel (flat, 5 shared slots), and the Realtor Spotlight (flat, 1 exclusive
+ * realtor slot). Multiplied prices round UP to the nearest number ending in
+ * 49 or 99.
  */
 
-export type PlacementTier = "standard" | "premier" | "carousel";
+export type PlacementTier =
+  | "standard"
+  | "premier"
+  | "carousel"
+  | "realtor_spot";
 
 export type AdvertiserCategory =
   | "restaurants"
   | "services"
-  | "short_term_rentals";
+  | "short_term_rentals"
+  | "realtors";
 
 // Base prices are the restaurants (1x) rate, in whole US dollars.
 const BASE_PRICE: Record<PlacementTier, number> = {
   standard: 299,
   premier: 1500,
   carousel: 5000,
+  realtor_spot: 5000,
 };
 
 const CATEGORY_MULTIPLIER: Record<AdvertiserCategory, number> = {
   restaurants: 1,
   services: 1.5,
   short_term_rentals: 2,
+  realtors: 2.5,
 };
 
-// Premier and the Large Carousel are flat for any category; the multiplier
-// applies only to the Standard listing tier.
+// Premier, the Large Carousel, and the Realtor Spotlight are flat for any
+// category; the multiplier applies only to the Standard listing tier.
 const AGNOSTIC_TIERS: ReadonlySet<PlacementTier> = new Set([
   "premier",
   "carousel",
+  "realtor_spot",
 ]);
 
-// Limited to five businesses total across the whole site.
+// Scarcity limits.
 export const CAROUSEL_TOTAL_SLOTS = 5;
+export const REALTOR_SPOT_SLOTS = 1;
 
 export const TIER_LABEL: Record<PlacementTier, string> = {
   standard: "Standard Listing",
   premier: "Premier",
   carousel: "Large Carousel",
+  realtor_spot: "Realtor Spotlight",
 };
 
 export const TIER_BLURB: Record<PlacementTier, string> = {
@@ -49,18 +61,22 @@ export const TIER_BLURB: Record<PlacementTier, string> = {
     "Top placement and a featured profile for standout visibility across the site.",
   carousel:
     "One of five rotating homepage spots seen sitewide. Maximum visibility.",
+  realtor_spot:
+    "The single exclusive realtor placement on the site. Be the agent festival visitors and home buyers see.",
 };
 
 export const CATEGORY_LABEL: Record<AdvertiserCategory, string> = {
   restaurants: "Restaurants",
   services: "Services",
   short_term_rentals: "Short-Term Rentals",
+  realtors: "Realtors",
 };
 
 export const PLACEMENT_TIERS: PlacementTier[] = [
   "standard",
   "premier",
   "carousel",
+  "realtor_spot",
 ];
 
 // The listing levels a host or business chooses from.
@@ -70,16 +86,24 @@ export const ADVERTISER_CATEGORIES: AdvertiserCategory[] = [
   "restaurants",
   "services",
   "short_term_rentals",
+  "realtors",
 ];
 
-/** Price in whole US dollars, rounded to a clean number. */
+// Round UP to the nearest whole dollar ending in 49 or 99.
+function roundUpTo49or99(value: number): number {
+  let n = Math.ceil(value);
+  while (n % 100 !== 49 && n % 100 !== 99) n++;
+  return n;
+}
+
+/** Price in whole US dollars. Multiplied tiers round up to a 49/99 ending. */
 export function priceFor(
   category: AdvertiserCategory,
   tier: PlacementTier,
 ): number {
   const base = BASE_PRICE[tier];
   if (AGNOSTIC_TIERS.has(tier)) return base;
-  return Math.round(base * CATEGORY_MULTIPLIER[category]);
+  return roundUpTo49or99(base * CATEGORY_MULTIPLIER[category]);
 }
 
 export function isAgnosticTier(tier: PlacementTier): boolean {
