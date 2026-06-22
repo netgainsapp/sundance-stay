@@ -6,6 +6,7 @@ import { prisma } from "@/lib/prisma";
 import { sendLeadNotification } from "@/lib/email";
 import { rateLimit } from "@/lib/rate-limit-durable";
 import { clientIp } from "@/lib/request";
+import { generateRawToken } from "@/lib/board-token";
 import type { FormState } from "./submit-lead";
 
 export async function submitAlertsSignup(
@@ -33,18 +34,26 @@ export async function submitAlertsSignup(
     return { ok: false, message: "Too many requests. Please try again shortly." };
   }
 
+  const email = parsed.data.visitorEmail.trim().toLowerCase();
   try {
     await prisma.lead.create({
       data: {
         sourceType: "alerts_signup",
         visitorName: "Subscriber",
-        visitorEmail: parsed.data.visitorEmail,
+        visitorEmail: email,
         message: "Festival lodging alerts signup",
       },
     });
 
+    // Add to the newsletter list (idempotent; re-subscribes if they return).
+    await prisma.newsletterSubscriber.upsert({
+      where: { email },
+      update: { status: "active", unsubscribedAt: null },
+      create: { email, unsubscribeToken: generateRawToken() },
+    });
+
     await sendLeadNotification("New festival lodging alerts signup", [
-      `Email: ${parsed.data.visitorEmail}`,
+      `Email: ${email}`,
     ]);
   } catch (err) {
     console.error("submitAlertsSignup failed", err);

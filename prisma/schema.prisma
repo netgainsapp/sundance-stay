@@ -87,6 +87,16 @@ enum BlogTopicStatus {
   skipped_thin
 }
 
+enum NewsletterStatus {
+  draft
+  sent
+}
+
+enum SubscriberStatus {
+  active
+  unsubscribed
+}
+
 model Lead {
   id           String     @id @default(cuid())
   sourceType   LeadSource
@@ -248,6 +258,31 @@ model FeatureFlag {
   key       String   @id
   enabled   Boolean  @default(false)
   updatedAt DateTime @updatedAt
+}
+
+// A newsletter issue: assembled from owned content plus advertiser assets,
+// rendered to email-safe HTML. Ships dormant; sending is flag + key gated.
+model NewsletterIssue {
+  id               String           @id @default(cuid())
+  subject          String
+  previewText      String
+  bodyHtml         String
+  bodyText         String
+  blocks           Json
+  status           NewsletterStatus @default(draft)
+  guardrailReasons Json?
+  recipientCount   Int              @default(0)
+  createdAt        DateTime         @default(now())
+  sentAt           DateTime?
+}
+
+model NewsletterSubscriber {
+  id               String           @id @default(cuid())
+  email            String           @unique
+  status           SubscriberStatus @default(active)
+  unsubscribeToken String           @unique
+  createdAt        DateTime         @default(now())
+  unsubscribedAt   DateTime?
 }
 
 model Sponsorship {

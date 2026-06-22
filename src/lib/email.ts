@@ -36,6 +36,21 @@ export async function sendBoardMagicLink(to: string, url: string) {
   });
 }
 
+/** Sends one newsletter email. No-ops without a Resend key. Returns true on send. */
+export async function sendNewsletterEmail(
+  to: string,
+  subject: string,
+  html: string,
+  text: string,
+): Promise<boolean> {
+  if (!resend) {
+    console.warn(`RESEND_API_KEY not set; newsletter to ${to} not sent`);
+    return false;
+  }
+  await resend.emails.send({ from: FROM, to, subject, html, text });
+  return true;
+}
+
 /** Alerts a board user that they have a new message, with a link to the thread. */
 export async function sendBoardMessageAlert(to: string, url: string) {
   if (!resend) {
