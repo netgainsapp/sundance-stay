@@ -2,6 +2,7 @@ import { SITE } from "@/lib/site";
 import { allBlogEntries } from "@/content/blog-feed";
 import { activeAdvertisers } from "@/content/advertisers";
 import { featuredProperties } from "@/content/properties";
+import { pickBoulderImage } from "@/content/boulder-images";
 import { assembleNewsletter } from "./assemble";
 import { renderNewsletterHtml, renderNewsletterText } from "./render";
 import { checkNewsletter } from "./guardrails";
@@ -16,8 +17,9 @@ export interface BuiltIssue {
 }
 
 /** Assembles a full newsletter issue from current owned content and advertiser
- * assets. Deterministic except for the optional model intro. */
-export async function buildIssue(): Promise<BuiltIssue> {
+ * assets. heroSeed rotates the Boulder hero image across issues. Deterministic
+ * except for the optional model intro. */
+export async function buildIssue(heroSeed = 0): Promise<BuiltIssue> {
   const entries = await allBlogEntries();
   const posts = entries.slice(0, 3).map((p) => ({
     title: p.title,
@@ -52,6 +54,7 @@ export async function buildIssue(): Promise<BuiltIssue> {
     posts,
     advertisers,
     stays,
+    heroImage: pickBoulderImage(heroSeed),
     ...(intro ? { intro } : {}),
   });
   const html = renderNewsletterHtml(content, { siteUrl: SITE.url });

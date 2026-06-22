@@ -26,6 +26,7 @@ export interface StayBlock {
 export interface NewsletterContent {
   subject: string;
   previewText: string;
+  heroImage: string;
   intro: string;
   posts: PostBlock[];
   advertisers: AdvertiserBlock[];

@@ -51,6 +51,11 @@ describe("assembleNewsletter", () => {
 describe("renderNewsletterHtml", () => {
   const content = assembleNewsletter({ posts: [post], advertisers: [advertiser], stays: [stay] });
   const html = renderNewsletterHtml(content, opts);
+  it("leads with a Boulder hero image", () => {
+    expect(content.heroImage).toMatch(/images\.unsplash\.com/);
+    // The renderer HTML-escapes & in the URL, so match the prefix.
+    expect(html).toContain(content.heroImage.split("&")[0]);
+  });
   it("pulls in advertiser assets (cover image, logo, name)", () => {
     expect(html).toContain("Flatiron Car Service");
     expect(html).toContain("https://img/cover.jpg");

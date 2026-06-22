@@ -28,6 +28,11 @@ export function renderNewsletterHtml(
   const { siteUrl } = opts;
   const sections: string[] = [];
 
+  if (c.heroImage) {
+    sections.push(
+      `<tr><td style="padding:0;"><img src="${esc(c.heroImage)}" width="600" alt="Boulder, Colorado" style="display:block;width:100%;max-height:220px;object-fit:cover;" /></td></tr>`,
+    );
+  }
   sections.push(
     `<tr><td style="padding:28px 28px 8px;font-family:Georgia,serif;font-size:22px;color:${CHARCOAL};font-weight:bold;">Sundance Stay Collective</td></tr>`,
     `<tr><td style="padding:0 28px 18px;font-family:Arial,sans-serif;font-size:15px;line-height:1.6;color:#465058;">${esc(c.intro)}</td></tr>`,

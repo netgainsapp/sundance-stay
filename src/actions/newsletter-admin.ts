@@ -10,7 +10,14 @@ import { sendIssue } from "@/lib/newsletter/send";
 /** Assembles a draft issue from current content and advertiser assets. */
 export async function buildDraftIssue(): Promise<void> {
   await requireAdmin();
-  const { content, html, text, gate } = await buildIssue();
+  // Rotate the Boulder hero image by how many issues already exist.
+  let heroSeed = 0;
+  try {
+    heroSeed = await prisma.newsletterIssue.count();
+  } catch {
+    heroSeed = 0;
+  }
+  const { content, html, text, gate } = await buildIssue(heroSeed);
   await prisma.newsletterIssue.create({
     data: {
       subject: content.subject,

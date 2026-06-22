@@ -4,6 +4,7 @@ import type {
   PostBlock,
   StayBlock,
 } from "./types";
+import { BOULDER_IMAGES } from "@/content/boulder-images";
 
 export const FESTIVAL_WINDOW = "January 21 to 31, 2027";
 
@@ -11,6 +12,7 @@ export interface AssembleInput {
   posts: PostBlock[];
   advertisers: AdvertiserBlock[];
   stays: StayBlock[];
+  heroImage?: string;
   subject?: string;
   previewText?: string;
   intro?: string;
@@ -35,6 +37,7 @@ export function assembleNewsletter(input: AssembleInput): NewsletterContent {
     stays,
     subject = "Your Boulder and Sundance 2027 update",
     previewText = "New guides, places to stay, and local partners for festival week.",
+    heroImage = BOULDER_IMAGES[0],
     intro = DEFAULT_INTRO,
     maxPosts = 3,
     maxAdvertisers = 4,
@@ -44,6 +47,7 @@ export function assembleNewsletter(input: AssembleInput): NewsletterContent {
   return {
     subject,
     previewText,
+    heroImage,
     intro,
     posts: posts.slice(0, maxPosts),
     advertisers: advertisers.slice(0, maxAdvertisers),
