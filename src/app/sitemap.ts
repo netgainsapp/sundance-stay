@@ -11,6 +11,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "",
     "/stay",
     "/last-minute",
+    "/neighborhoods",
     "/services",
     "/concierge",
     "/list-your-home",

@@ -128,6 +128,14 @@ export default function Home() {
             />
           ))}
         </div>
+        <div className="mt-8">
+          <Link
+            href="/neighborhoods"
+            className="text-sm font-medium text-mountain hover:text-copper"
+          >
+            See the area map and explore every neighborhood
+          </Link>
+        </div>
       </section>
 
       <section className="mx-auto max-w-7xl px-6 py-[var(--space-section)]">

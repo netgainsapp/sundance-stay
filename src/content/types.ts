@@ -58,6 +58,14 @@ export interface Neighborhood {
   name: string;
   description: string;
   image: string;
+  // Richer area overview shown on the Neighborhoods page.
+  overview: string;
+  // A few quick characteristics, e.g. "Most walkable", "Near CU".
+  highlights: string[];
+  // Position on the schematic area map, as percentages (0 to 100).
+  // x: west to east, y: north to south.
+  mapX: number;
+  mapY: number;
 }
 
 export interface ServiceCategory {
