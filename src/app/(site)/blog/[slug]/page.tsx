@@ -5,7 +5,8 @@ import { SectionHeader } from "@/components/ui/SectionHeader";
 import { BlogCard } from "@/components/cards/BlogCard";
 import { ArticleBody } from "@/components/content/ArticleBody";
 import { JsonLd } from "@/components/seo/JsonLd";
-import { blogPosts, getBlogPost } from "@/content/blog";
+import { getBlogPost } from "@/content/blog";
+import { getBlogEntry, curatedSlugs } from "@/content/blog-feed";
 import {
   pageMetadata,
   articleJsonLd,
@@ -14,7 +15,7 @@ import {
 } from "@/lib/seo";
 
 export function generateStaticParams() {
-  return blogPosts.map((p) => ({ slug: p.slug }));
+  return curatedSlugs().map((slug) => ({ slug }));
 }
 
 export async function generateMetadata({
@@ -23,7 +24,7 @@ export async function generateMetadata({
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
-  const post = getBlogPost(slug);
+  const post = await getBlogEntry(slug);
   if (!post) {
     return pageMetadata({
       title: "Article not found",
@@ -53,7 +54,7 @@ export default async function BlogPostPage({
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
-  const post = getBlogPost(slug);
+  const post = await getBlogEntry(slug);
   if (!post) notFound();
 
   const related = (post.relatedSlugs ?? [])

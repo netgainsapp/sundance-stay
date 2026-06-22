@@ -1,8 +1,10 @@
 import { SectionHeader } from "@/components/ui/SectionHeader";
 import { BlogCard } from "@/components/cards/BlogCard";
 import { JsonLd } from "@/components/seo/JsonLd";
-import { sortedBlogPosts } from "@/content/blog";
+import { allBlogEntries } from "@/content/blog-feed";
 import { pageMetadata, breadcrumbJsonLd } from "@/lib/seo";
+
+export const dynamic = "force-dynamic";
 
 export const metadata = pageMetadata({
   title: "Boulder and Sundance 2027 Blog",
@@ -11,8 +13,8 @@ export const metadata = pageMetadata({
   path: "/blog",
 });
 
-export default function BlogIndexPage() {
-  const posts = sortedBlogPosts();
+export default async function BlogIndexPage() {
+  const posts = await allBlogEntries();
 
   return (
     <section className="mx-auto max-w-7xl px-6 py-[var(--space-section)]">

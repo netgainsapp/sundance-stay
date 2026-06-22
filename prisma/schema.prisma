@@ -69,6 +69,24 @@ enum ReportStatus {
   dismissed
 }
 
+enum GeneratedPostType {
+  neighborhood
+  category
+  cornerstone
+}
+
+enum GeneratedPostStatus {
+  draft
+  published
+  unpublished
+}
+
+enum BlogTopicStatus {
+  candidate
+  used
+  skipped_thin
+}
+
 model Lead {
   id           String     @id @default(cuid())
   sourceType   LeadSource
@@ -186,6 +204,50 @@ model Message {
   createdAt DateTime  @default(now())
 
   @@index([threadId])
+}
+
+// An auto-generated blog post. Curated posts live in src/content/blog.ts; these
+// are produced by the engine and render alongside them when published.
+model GeneratedPost {
+  id               String              @id @default(cuid())
+  slug             String              @unique
+  title            String
+  dek              String?
+  excerpt          String
+  bodyMd           String
+  postType         GeneratedPostType
+  status           GeneratedPostStatus @default(draft)
+  topicKey         String
+  dataSnapshot     Json?
+  seoTitle         String?
+  seoDescription   String?
+  tags             Json
+  guardrailReasons Json?
+  featuredImage    String
+  createdAt        DateTime            @default(now())
+  updatedAt        DateTime            @updatedAt
+  publishedAt      DateTime?
+
+  @@index([status, publishedAt])
+  @@index([topicKey])
+}
+
+model BlogTopic {
+  id            String          @id @default(cuid())
+  topicKey      String          @unique
+  label         String
+  postType      GeneratedPostType
+  source        String
+  status        BlogTopicStatus @default(candidate)
+  score         Float           @default(0)
+  lastAttemptAt DateTime?
+  createdAt     DateTime        @default(now())
+}
+
+model FeatureFlag {
+  key       String   @id
+  enabled   Boolean  @default(false)
+  updatedAt DateTime @updatedAt
 }
 
 model Sponsorship {

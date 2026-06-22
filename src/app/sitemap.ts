@@ -5,8 +5,9 @@ import { businesses } from "@/content/businesses";
 import { guides } from "@/content/guides";
 import { blogPosts } from "@/content/blog";
 import { serviceCategories } from "@/content/services";
+import { prisma } from "@/lib/prisma";
 
-export default function sitemap(): MetadataRoute.Sitemap {
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const base = SITE.url;
   const staticRoutes = [
     "",
@@ -27,5 +28,14 @@ export default function sitemap(): MetadataRoute.Sitemap {
   for (const g of guides) urls.push({ url: `${base}/guides/${g.slug}` });
   for (const p of blogPosts) urls.push({ url: `${base}/blog/${p.slug}` });
   for (const c of serviceCategories) urls.push({ url: `${base}/services/${c.slug}` });
+  try {
+    const generated = await prisma.generatedPost.findMany({
+      where: { status: "published" },
+      select: { slug: true },
+    });
+    for (const p of generated) urls.push({ url: `${base}/blog/${p.slug}` });
+  } catch {
+    // No database connected; curated blog URLs still ship.
+  }
   return urls;
 }
