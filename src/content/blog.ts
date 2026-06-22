@@ -141,7 +141,7 @@ Reserve early, reserve the things you cannot fix later, and compare the full cos
       "New to Sundance and new to Boulder? Here is how the festival works and how to make your first visit a great one.",
     category: "Sundance 2027",
     featuredImage:
-      "https://images.unsplash.com/photo-1459749411175-04bf5292ceea?w=1400&q=80",
+      "https://images.unsplash.com/photo-1454496522488-7a8e488e8606?w=1400&q=80",
     author: "The Sundance Stay Collective Team",
     publishedAt: "2026-04-22",
     tags: ["Sundance 2027", "Travel Tips", "First Timer"],
@@ -194,7 +194,7 @@ The best part of a first Sundance is the surprise. Some of the films you stumble
       "After more than forty years in Park City, Sundance has a new home. Here is what changes and what to expect in Boulder.",
     category: "Sundance 2027",
     featuredImage:
-      "https://images.unsplash.com/photo-1454496522488-7a8e488e8606?w=1400&q=80",
+      "https://images.unsplash.com/photo-1516644267149-681fb9f0624c?w=1400&q=80",
     author: "The Sundance Stay Collective Team",
     publishedAt: "2026-05-06",
     tags: ["Sundance 2027", "Travel Tips"],
@@ -289,7 +289,7 @@ Boulder takes its food seriously, and festival week is a chance to taste why. Mi
       "You do not need a big budget to enjoy the festival. Here is how to keep lodging, transit, and meals affordable.",
     category: "Travel Tips",
     featuredImage:
-      "https://images.unsplash.com/photo-1484154218962-a197022b5858?w=1400&q=80",
+      "https://images.unsplash.com/photo-1653250947541-756cf6d786f4?w=1400&q=80",
     author: "The Sundance Stay Collective Team",
     publishedAt: "2026-05-28",
     tags: ["Budget", "Travel Tips", "Sundance 2027"],
@@ -339,7 +339,7 @@ A budget Sundance in Boulder is entirely doable. Book lodging early and a little
       "Boulder is a wonderful family base for the festival. Here is how to choose lodging and keep kids happy between films.",
     category: "Travel Tips",
     featuredImage:
-      "https://images.unsplash.com/photo-1449965408869-eaa3f722e40d?w=1400&q=80",
+      "https://images.unsplash.com/photo-1484154218962-a197022b5858?w=1400&q=80",
     author: "The Sundance Stay Collective Team",
     publishedAt: "2026-06-03",
     tags: ["Family", "Travel Tips", "Sundance 2027"],
@@ -444,7 +444,7 @@ The films are the reason you came, but the hours around them are where you actua
       "Boulder homeowners can welcome festival visitors and earn during the event. Here is how to do it right and legally.",
     category: "Hosting",
     featuredImage:
-      "https://images.unsplash.com/photo-1600104146011-ad1a8571f161?w=1400&q=80",
+      "https://images.unsplash.com/photo-1459749411175-04bf5292ceea?w=1400&q=80",
     author: "The Sundance Stay Collective Team",
     publishedAt: "2026-06-18",
     tags: ["Hosting", "Boulder", "Sundance 2027"],

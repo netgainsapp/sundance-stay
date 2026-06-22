@@ -10,7 +10,8 @@ import { assembleBodyMd, slugify, dedupeSlug } from "./assemble";
 import { checkPost } from "./guardrails";
 import type { CandidatePost, TopicCandidate } from "./types";
 
-// Verified Boulder Unsplash IDs, assigned deterministically per slug.
+// Verified Boulder Unsplash IDs, assigned per slug while avoiding any image
+// already used by an existing post (so the blog index never shows a duplicate).
 const IMAGES = [
   "photo-1600104146011-ad1a8571f161",
   "photo-1449965408869-eaa3f722e40d",
@@ -18,12 +19,22 @@ const IMAGES = [
   "photo-1454496522488-7a8e488e8606",
   "photo-1502602898657-3e91760cbb34",
   "photo-1484154218962-a197022b5858",
-];
+  "photo-1459749411175-04bf5292ceea",
+  "photo-1659730251471-1b1dfc88b491",
+  "photo-1516644267149-681fb9f0624c",
+  "photo-1653250947541-756cf6d786f4",
+].map((id) => `https://images.unsplash.com/${id}?w=1400&q=80`);
 
-function imageFor(seed: string): string {
+function hashIndex(seed: string, len: number): number {
   let h = 0;
   for (const c of seed) h = (h * 31 + c.charCodeAt(0)) >>> 0;
-  return `https://images.unsplash.com/${IMAGES[h % IMAGES.length]}?w=1400&q=80`;
+  return h % len;
+}
+
+function imageFor(seed: string, used: Set<string>): string {
+  const free = IMAGES.filter((u) => !used.has(u));
+  const pool = free.length > 0 ? free : IMAGES;
+  return pool[hashIndex(seed, pool.length)];
 }
 
 export type RunResult = {
@@ -59,7 +70,7 @@ export async function runOnce(): Promise<RunResult> {
   const catalog = loadCatalog();
   const [genPosts, topicRows] = await Promise.all([
     prisma.generatedPost.findMany({
-      select: { slug: true, topicKey: true, status: true, bodyMd: true },
+      select: { slug: true, topicKey: true, status: true, bodyMd: true, featuredImage: true },
       orderBy: { createdAt: "desc" },
       take: 50,
     }),
@@ -131,7 +142,13 @@ export async function runOnce(): Promise<RunResult> {
       seoDescription: draft.seoDescription ?? null,
       tags: draft.tags,
       guardrailReasons: gate.ok ? undefined : gate.reasons,
-      featuredImage: imageFor(slug),
+      featuredImage: imageFor(
+        slug,
+        new Set<string>([
+          ...genPosts.map((p) => p.featuredImage),
+          ...blogPosts.map((p) => p.featuredImage),
+        ]),
+      ),
       publishedAt: publish ? new Date() : null,
     },
   });
