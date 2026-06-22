@@ -3,7 +3,7 @@ import { z } from "zod";
 const honeypot = z.string().max(0, "spam detected");
 
 export const leadSchema = z.object({
-  sourceType: z.enum(["property_inquiry", "business_inquiry", "general_contact", "sponsor_inquiry", "urgent_stay"]),
+  sourceType: z.enum(["property_inquiry", "business_inquiry", "general_contact", "sponsor_inquiry", "urgent_stay", "standby_host"]),
   propertySlug: z.string().optional(),
   businessSlug: z.string().optional(),
   visitorName: z.string().min(2, "Please enter your name").max(120),
@@ -45,3 +45,15 @@ export const urgentStaySchema = z.object({
   website: honeypot,
 });
 export type UrgentStayInput = z.infer<typeof urgentStaySchema>;
+
+export const standbyHostSchema = z.object({
+  visitorName: z.string().min(2, "Please enter your name").max(120),
+  visitorEmail: z.email("Please enter a valid email"),
+  visitorPhone: z.string().max(40).optional().or(z.literal("")),
+  area: z.string().min(2, "Where is your home?").max(120),
+  sleeps: z.string().max(40).optional().or(z.literal("")),
+  datesAvailable: z.string().min(2, "When could you host?").max(120),
+  message: z.string().max(2000).optional().or(z.literal("")),
+  website: honeypot,
+});
+export type StandbyHostInput = z.infer<typeof standbyHostSchema>;

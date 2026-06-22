@@ -137,11 +137,11 @@ export default function Home() {
               Just in case
             </p>
             <h2 className="mt-2 font-heading text-2xl text-white md:text-3xl">
-              Everything booked? We keep a backup.
+              Everything booked? We make the match.
             </h2>
             <p className="mt-2 max-w-xl text-sm leading-relaxed text-white/85">
-              When Festival Season fills up, we keep a standby list of Boulder
-              homes for last-minute needs. Tell us what you need and we move fast.
+              When Festival Season fills up, we match last-minute guests with
+              Boulder homeowners on standby. Tell us what you need and we connect you.
             </p>
           </div>
           <Link

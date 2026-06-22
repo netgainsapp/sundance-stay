@@ -3,6 +3,7 @@ import {
   leadSchema,
   propertySubmissionSchema,
   urgentStaySchema,
+  standbyHostSchema,
 } from "@/lib/validation";
 
 describe("leadSchema", () => {
@@ -49,6 +50,18 @@ describe("urgentStaySchema", () => {
 
   it("rejects a filled honeypot", () => {
     const r = urgentStaySchema.safeParse({ visitorName: "Bot", visitorEmail: "bot@example.com", datesNeeded: "whenever", website: "http://spam.example" });
+    expect(r.success).toBe(false);
+  });
+});
+
+describe("standbyHostSchema", () => {
+  it("accepts a valid standby host", () => {
+    const r = standbyHostSchema.safeParse({ visitorName: "Host Helen", visitorEmail: "helen@example.com", visitorPhone: "303-555-0190", area: "North Boulder", sleeps: "6", datesAvailable: "Jan 21 to Jan 31", message: "Happy to vacate for the festival.", website: "" });
+    expect(r.success).toBe(true);
+  });
+
+  it("requires area and dates available", () => {
+    const r = standbyHostSchema.safeParse({ visitorName: "Helen", visitorEmail: "helen@example.com", area: "", datesAvailable: "", website: "" });
     expect(r.success).toBe(false);
   });
 });

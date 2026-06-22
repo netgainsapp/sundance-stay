@@ -13,6 +13,7 @@ enum LeadSource {
   general_contact
   sponsor_inquiry
   urgent_stay
+  standby_host
 }
 
 enum LeadStatus {
