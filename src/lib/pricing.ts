@@ -54,6 +54,13 @@ export const REALTOR_SPOT_SLOTS = 1;
 export const CARE_LISTING_PRICE = 199;
 export const CARE_CATEGORIES = ["child-care", "pet-care"] as const;
 
+// Last-Minute Lodging Match: a standalone flat fee a guest pays to be matched
+// with an available standby home during a sold out festival window. This is a
+// finder and match fee, not a cut of the stay. Charged once a match is
+// confirmed (payment wiring deferred to Stripe). Hosts join the standby pool
+// for free; only the matched guest pays.
+export const LODGING_MATCH_FEE = 199;
+
 // Concierge packages, priced by coverage model. Flat fees for the festival
 // window. We arrange; the licensed local providers deliver.
 export type ConciergeTier = {
