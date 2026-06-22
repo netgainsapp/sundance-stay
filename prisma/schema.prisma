@@ -36,6 +36,18 @@ enum SponsorshipStatus {
   expired
 }
 
+enum BoardPostType {
+  need
+  availability
+}
+
+enum BoardPostStatus {
+  pending
+  active
+  closed
+  removed
+}
+
 model Lead {
   id           String     @id @default(cuid())
   sourceType   LeadSource
@@ -65,6 +77,43 @@ model PropertySubmission {
   shortNotice       Boolean    @default(false)
   status            LeadStatus @default(new)
   createdAt         DateTime   @default(now())
+}
+
+// Public marketplace user (a traveler or a host). Distinct from the single
+// admin operator. Authenticated by passwordless email magic link.
+model BoardUser {
+  id        String           @id @default(cuid())
+  email     String           @unique
+  name      String?
+  createdAt DateTime         @default(now())
+  posts     BoardPost[]
+  tokens    MagicLinkToken[]
+}
+
+model MagicLinkToken {
+  id        String    @id @default(cuid())
+  userId    String
+  user      BoardUser @relation(fields: [userId], references: [id], onDelete: Cascade)
+  tokenHash String    @unique
+  expiresAt DateTime
+  usedAt    DateTime?
+  createdAt DateTime  @default(now())
+}
+
+model BoardPost {
+  id        String          @id @default(cuid())
+  authorId  String
+  author    BoardUser       @relation(fields: [authorId], references: [id], onDelete: Cascade)
+  type      BoardPostType
+  area      String
+  dates     String
+  partySize String?
+  budget    String?
+  notes     String
+  status    BoardPostStatus @default(pending)
+  createdAt DateTime        @default(now())
+
+  @@index([status, type])
 }
 
 model Sponsorship {

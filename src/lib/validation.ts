@@ -75,3 +75,23 @@ export const alertsSignupSchema = z.object({
   website: honeypot,
 });
 export type AlertsSignupInput = z.infer<typeof alertsSignupSchema>;
+
+// Last-Minute Board: passwordless sign in request.
+export const magicLinkSchema = z.object({
+  email: z.email("Please enter a valid email"),
+  name: z.string().max(120).optional().or(z.literal("")),
+  website: honeypot,
+});
+export type MagicLinkInput = z.infer<typeof magicLinkSchema>;
+
+// Last-Minute Board: a free post, either a traveler need or host availability.
+export const boardPostSchema = z.object({
+  type: z.enum(["need", "availability"]),
+  area: z.string().min(2, "Where in the Boulder area?").max(120),
+  dates: z.string().min(2, "Which dates?").max(120),
+  partySize: z.string().max(60).optional().or(z.literal("")),
+  budget: z.string().max(80).optional().or(z.literal("")),
+  notes: z.string().min(10, "Please add a little more detail").max(2000),
+  website: honeypot,
+});
+export type BoardPostInput = z.infer<typeof boardPostSchema>;

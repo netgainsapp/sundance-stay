@@ -52,6 +52,25 @@ export default function LastMinutePage() {
       </section>
 
       <section className="mx-auto max-w-7xl px-6 pb-[var(--space-section)]">
+        <div className="flex flex-col items-start gap-4 rounded-card border border-mountain/20 bg-mountain/5 p-8 md:flex-row md:items-center md:justify-between">
+          <div>
+            <p className="text-xs font-medium uppercase tracking-[0.2em] text-mountain">
+              New
+            </p>
+            <h2 className="mt-2 font-heading text-2xl text-charcoal">
+              Browse the Last-Minute Board
+            </h2>
+            <p className="mt-2 max-w-2xl text-sm leading-relaxed text-charcoal/70">
+              Post what you need, or the space you have open, and see the other
+              side for yourself. Posting is free. A flat fee unlocks a private
+              conversation when you find a match.
+            </p>
+          </div>
+          <Cta href="/board">Open the board</Cta>
+        </div>
+      </section>
+
+      <section className="mx-auto max-w-7xl px-6 pb-[var(--space-section)]">
         <div className="grid gap-8 lg:grid-cols-2">
           <div className="rounded-card border border-charcoal/10 p-6 shadow-sm md:p-8">
             <p className="text-xs font-medium uppercase tracking-[0.2em] text-copper">
