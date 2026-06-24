@@ -29,17 +29,22 @@ export async function middleware(req: NextRequest) {
     return NextResponse.redirect(url);
   }
 
-  // Admin console. The login page must stay public so the operator can sign in.
-  if (pathname === "/admin/login" || pathname === "/admin/login/") {
-    return NextResponse.next();
-  }
-  const token = req.cookies.get(COOKIE_NAME)?.value;
-  if (await verifySessionToken(token)) return NextResponse.next();
+  // Admin console. Only check auth for /admin routes
+  if (pathname.startsWith("/admin") || pathname.startsWith("/api/admin")) {
+    // The login page must stay public so the operator can sign in.
+    if (pathname === "/admin/login" || pathname === "/admin/login/") {
+      return NextResponse.next();
+    }
+    const token = req.cookies.get(COOKIE_NAME)?.value;
+    if (await verifySessionToken(token)) return NextResponse.next();
 
-  const url = req.nextUrl.clone();
-  url.pathname = "/admin/login";
-  url.search = "";
-  return NextResponse.redirect(url);
+    const url = req.nextUrl.clone();
+    url.pathname = "/admin/login";
+    url.search = "";
+    return NextResponse.redirect(url);
+  }
+
+  return NextResponse.next();
 }
 
 export const config = {
