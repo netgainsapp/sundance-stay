@@ -7,7 +7,7 @@ export function Footer() {
       <div className="mx-auto grid max-w-7xl gap-10 px-6 py-14 md:grid-cols-4">
         <div className="md:col-span-2">
           <p className="font-heading text-lg text-white">
-            Sundance Stay Collective
+            {SITE.name}
           </p>
           <p className="mt-3 max-w-md text-sm leading-relaxed">
             {SITE.description}

@@ -15,7 +15,7 @@ export default async function AdminLoginPage() {
     <div className="flex min-h-screen items-center justify-center bg-sand/20 px-6">
       <div className="w-full max-w-sm rounded-card border border-charcoal/10 bg-white p-8 shadow-sm">
         <p className="text-xs font-medium uppercase tracking-[0.2em] text-copper">
-          Sundance Stay Collective
+          Boulder Film Collective
         </p>
         <h1 className="mt-2 font-heading text-2xl text-charcoal">Operator sign in</h1>
         <p className="mt-2 mb-6 text-sm text-charcoal/60">

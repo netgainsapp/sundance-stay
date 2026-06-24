@@ -1,11 +1,11 @@
 export const SITE = {
-  name: "Sundance Stay Collective",
-  shortName: "Sundance Stay",
+  name: "Boulder Film Collective",
+  shortName: "Boulder Film Collective",
   url: process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000",
   description:
-    "Your guide to staying in Boulder during Festival Season. Discover lodging, local services, and trusted Boulder area resources.",
+    "Your guide to staying in Boulder during Festival Season. Curated lodging, trusted local services, and insider access to everything you need for an unforgettable stay.",
   disclaimer:
-    "Not affiliated with, endorsed by, or sponsored by Sundance Institute or the Sundance Film Festival.",
+    "Boulder Film Collective is an independent guide to lodging and services in Boulder. Not affiliated with, endorsed by, or sponsored by Sundance Institute or the Sundance Film Festival.",
   nav: [
     { label: "Home", href: "/" },
     { label: "Stay", href: "/stay" },

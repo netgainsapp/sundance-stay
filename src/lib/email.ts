@@ -4,7 +4,7 @@ const resend = process.env.RESEND_API_KEY ? new Resend(process.env.RESEND_API_KE
 const TO = process.env.LEADS_EMAIL;
 const FROM =
   process.env.RESEND_FROM_ADDRESS ??
-  "Sundance Stay Collective <noreply@netgains.app>";
+  "Boulder Film Collective <noreply@netgains.app>";
 
 export async function sendLeadNotification(subject: string, lines: string[]) {
   if (!resend || !TO) {
@@ -24,7 +24,7 @@ export async function sendBoardMagicLink(to: string, url: string) {
   await resend.emails.send({
     from: FROM,
     to,
-    subject: "Your Sundance Stay Collective sign in link",
+    subject: "Your Boulder Film Collective sign in link",
     text: [
       "Use the link below to sign in to the Last-Minute Board.",
       "",

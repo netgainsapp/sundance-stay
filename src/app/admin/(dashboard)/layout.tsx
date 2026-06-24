@@ -29,7 +29,7 @@ export default async function DashboardLayout({
       <aside className="flex w-56 shrink-0 flex-col justify-between border-r border-charcoal/10 bg-charcoal text-white/80">
         <div>
           <div className="px-6 py-5 font-heading text-lg text-white">
-            Sundance Admin
+            Boulder Film Admin
           </div>
           <nav aria-label="Admin navigation" className="flex flex-col px-3">
             {NAV.map((item) => (

@@ -15,7 +15,7 @@ export function Header() {
           className="font-heading text-xl text-charcoal"
           onClick={() => setOpen(false)}
         >
-          Sundance Stay Collective
+          {SITE.name}
         </Link>
 
         <nav
