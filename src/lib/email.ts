@@ -71,3 +71,41 @@ export async function sendBoardMessageAlert(to: string, url: string) {
     ].join("\n"),
   });
 }
+
+/** Sends a notification to the admin when a partner joins the waitlist. */
+export async function sendWaitlistNotification({
+  email,
+  companyName,
+  category,
+  details,
+  type,
+}: {
+  email: string;
+  companyName: string;
+  category: string;
+  details: string;
+  type: "partner" | "guest";
+}) {
+  if (!resend || !TO) {
+    console.warn(
+      `RESEND_API_KEY or LEADS_EMAIL not set; skipping waitlist notification for ${email}`
+    );
+    return;
+  }
+
+  if (type === "partner") {
+    await resend.emails.send({
+      from: FROM,
+      to: TO,
+      subject: `New Partner Interest: ${companyName}`,
+      text: [
+        `A partner has joined the Boulder Film Collective waitlist.`,
+        "",
+        `Email: ${email}`,
+        `Company: ${companyName}`,
+        `Category: ${category}`,
+        `Details: ${details}`,
+      ].join("\n"),
+    });
+  }
+}

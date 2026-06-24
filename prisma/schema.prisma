@@ -300,3 +300,16 @@ model Sponsorship {
   notes        String?
   createdAt    DateTime          @default(now())
 }
+
+model Waitlist {
+  id                String    @id @default(cuid())
+  email             String    @unique
+  isPartner         Boolean   @default(false)
+  companyName       String?
+  partnerCategory   String?   // property, transportation, food, other
+  proposalDetails   String?
+  createdAt         DateTime  @default(now())
+
+  @@index([isPartner])
+  @@index([createdAt])
+}
