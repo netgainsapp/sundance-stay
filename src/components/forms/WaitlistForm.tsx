@@ -34,11 +34,6 @@ export function WaitlistForm() {
       // Set cookie to unlock full site
       document.cookie = "waitlist_joined=true; path=/; max-age=31536000";
       setStatus("success");
-
-      // Redirect to /stay after 2 seconds
-      setTimeout(() => {
-        window.location.href = "/stay";
-      }, 2000);
     } catch (error) {
       setStatus("error");
       setErrorMessage("Something went wrong. Please try again.");
@@ -57,9 +52,8 @@ export function WaitlistForm() {
         <p className="mt-4 text-lg text-charcoal/90">
           {isPartner
             ? "Thanks for reaching out. We'll be in touch about partnership opportunities."
-            : "We'll notify you when Boulder Film Collective goes live."}
+            : "Check your email for confirmation. You now have access to the full Boulder Film Collective guide."}
         </p>
-        <p className="mt-6 text-base text-charcoal/70 animate-pulse font-semibold">Redirecting...</p>
       </div>
     );
   }

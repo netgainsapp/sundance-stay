@@ -72,7 +72,7 @@ export async function sendBoardMessageAlert(to: string, url: string) {
   });
 }
 
-/** Sends a notification to the admin when a partner joins the waitlist. */
+/** Sends a confirmation email to admin for all waitlist signups (testing). */
 export async function sendWaitlistNotification({
   email,
   companyName,
@@ -93,19 +93,30 @@ export async function sendWaitlistNotification({
     return;
   }
 
-  if (type === "partner") {
-    await resend.emails.send({
-      from: FROM,
-      to: TO,
-      subject: `New Partner Interest: ${companyName}`,
-      text: [
+  const subject = type === "partner"
+    ? `New Partner Interest: ${companyName}`
+    : `New Waitlist Signup: ${email}`;
+
+  const body = type === "partner"
+    ? [
         `A partner has joined the Boulder Film Collective waitlist.`,
         "",
         `Email: ${email}`,
         `Company: ${companyName}`,
         `Category: ${category}`,
         `Details: ${details}`,
-      ].join("\n"),
-    });
-  }
+      ].join("\n")
+    : [
+        `A new visitor has joined the Boulder Film Collective waitlist.`,
+        "",
+        `Email: ${email}`,
+        `Type: Guest`,
+      ].join("\n");
+
+  await resend.emails.send({
+    from: FROM,
+    to: TO,
+    subject,
+    text: body,
+  });
 }

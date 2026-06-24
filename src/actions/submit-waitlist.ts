@@ -35,16 +35,14 @@ export async function submitWaitlistSignup(
       },
     });
 
-    // Send notification email only for partners
-    if (data.isPartner) {
-      await sendWaitlistNotification({
-        email: data.email,
-        companyName: data.companyName || "Unknown",
-        category: data.partnerCategory || "Other",
-        details: data.proposalDetails || "No details provided",
-        type: "partner",
-      });
-    }
+    // Send confirmation email to admin for all signups (testing)
+    await sendWaitlistNotification({
+      email: data.email,
+      companyName: data.companyName || "Guest",
+      category: data.partnerCategory || "N/A",
+      details: data.proposalDetails || "N/A",
+      type: data.isPartner ? "partner" : "guest",
+    });
 
     return { ok: true };
   } catch (error) {
