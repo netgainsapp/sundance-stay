@@ -47,19 +47,19 @@ export function WaitlistForm() {
 
   if (status === "success") {
     return (
-      <div className="p-8 text-center bg-mountain/10 border-2 border-mountain rounded-xl">
+      <div className="p-8 text-center bg-white border-4 border-mountain rounded-xl shadow-lg">
         <div className="inline-block mb-4">
-          <svg className="w-12 h-12 text-mountain" fill="currentColor" viewBox="0 0 20 20">
+          <svg className="w-16 h-16 text-mountain" fill="currentColor" viewBox="0 0 20 20">
             <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
           </svg>
         </div>
-        <h3 className="text-2xl font-semibold text-mountain">You're on the list.</h3>
-        <p className="mt-3 text-base text-charcoal/80">
+        <h3 className="text-4xl font-bold text-charcoal">You're on the list.</h3>
+        <p className="mt-4 text-lg text-charcoal/90">
           {isPartner
             ? "Thanks for reaching out. We'll be in touch about partnership opportunities."
             : "We'll notify you when Boulder Film Collective goes live."}
         </p>
-        <p className="mt-4 text-sm text-charcoal/60 animate-pulse">Redirecting in a moment...</p>
+        <p className="mt-6 text-base text-charcoal/70 animate-pulse font-semibold">Redirecting...</p>
       </div>
     );
   }
