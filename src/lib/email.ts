@@ -4,7 +4,7 @@ const resend = process.env.RESEND_API_KEY ? new Resend(process.env.RESEND_API_KE
 const TO = process.env.LEADS_EMAIL;
 const FROM =
   process.env.RESEND_FROM_ADDRESS ??
-  "Boulder Film Collective <noreply@netgains.app>";
+  "Boulder Film Collective <hello@boulderfilmcollective.com>";
 
 export async function sendLeadNotification(subject: string, lines: string[]) {
   if (!resend || !TO) {

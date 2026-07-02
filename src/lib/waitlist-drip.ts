@@ -7,7 +7,10 @@ const resend = process.env.RESEND_API_KEY
 
 const FROM =
   process.env.RESEND_FROM_ADDRESS ??
-  "Boulder Film Collective <noreply@netgains.app>";
+  "Boulder Film Collective <hello@boulderfilmcollective.com>";
+
+/** Replies to drip emails land in the admin inbox until a real mailbox exists on the domain. */
+const REPLY_TO = process.env.LEADS_EMAIL;
 
 /**
  * While testing, set WAITLIST_DRIP_REDIRECT to an inbox (e.g. the admin's) and
@@ -146,6 +149,7 @@ async function deliver(
   await resend.emails.send({
     from: FROM,
     to: REDIRECT ?? to,
+    replyTo: REPLY_TO,
     subject: REDIRECT ? `[DRIP TEST for ${to}] ${email.subject}` : email.subject,
     text: email.body + "\n" + footer(unsubscribeToken),
   });
