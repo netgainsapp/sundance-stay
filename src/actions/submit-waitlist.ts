@@ -2,6 +2,7 @@
 
 import { prisma } from "@/lib/prisma";
 import { sendWaitlistNotification } from "@/lib/email";
+import { sendWelcome } from "@/lib/waitlist-drip";
 
 type WaitlistData = {
   email: string;
@@ -35,13 +36,21 @@ export async function submitWaitlistSignup(
       },
     });
 
-    // Send confirmation email to admin for all signups (testing)
+    // Admin alert for every signup.
     await sendWaitlistNotification({
       email: data.email,
       companyName: data.companyName || "Guest",
       category: data.partnerCategory || "N/A",
       details: data.proposalDetails || "N/A",
       type: data.isPartner ? "partner" : "guest",
+    });
+
+    // Welcome email to the subscriber (redirected to the test inbox while
+    // WAITLIST_DRIP_REDIRECT is set). Drip stages 1..3 follow via daily cron.
+    await sendWelcome({
+      email: waitlistEntry.email,
+      isPartner: waitlistEntry.isPartner,
+      unsubscribeToken: waitlistEntry.unsubscribeToken,
     });
 
     return { ok: true };

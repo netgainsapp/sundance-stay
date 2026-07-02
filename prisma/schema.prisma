@@ -310,6 +310,13 @@ model Waitlist {
   proposalDetails   String?
   createdAt         DateTime  @default(now())
 
+  // Nurture drip: 0 = only welcome sent, 1..3 = last drip email sent.
+  dripStage         Int       @default(0)
+  dripLastSentAt    DateTime?
+  unsubscribed      Boolean   @default(false)
+  unsubscribeToken  String    @unique @default(cuid())
+
   @@index([isPartner])
   @@index([createdAt])
+  @@index([unsubscribed, dripStage])
 }
