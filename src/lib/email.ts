@@ -6,12 +6,29 @@ const FROM =
   process.env.RESEND_FROM_ADDRESS ??
   "Boulder Film Collective <hello@boulderfilmcollective.com>";
 
+/**
+ * The Resend SDK returns { data, error } and never throws on API failures
+ * (invalid key, unverified domain, bad address). Every send must pass through
+ * this guard so failures are loud instead of silently reporting success.
+ */
+export function assertSent(
+  result: { data: { id: string } | null; error: { message: string; name: string } | null },
+  context: string,
+): void {
+  if (result.error) {
+    throw new Error(`Resend send failed (${context}): ${result.error.name}: ${result.error.message}`);
+  }
+}
+
 export async function sendLeadNotification(subject: string, lines: string[]) {
   if (!resend || !TO) {
     console.warn("RESEND_API_KEY or LEADS_EMAIL not set; skipping email send");
     return;
   }
-  await resend.emails.send({ from: FROM, to: TO, subject, text: lines.join("\n") });
+  assertSent(
+    await resend.emails.send({ from: FROM, to: TO, subject, text: lines.join("\n") }),
+    "lead notification",
+  );
 }
 
 /** Sends a passwordless sign in link to a marketplace user's own email. */
@@ -21,7 +38,7 @@ export async function sendBoardMagicLink(to: string, url: string) {
     console.warn(`RESEND_API_KEY not set; magic link for ${to}: ${url}`);
     return;
   }
-  await resend.emails.send({
+  assertSent(await resend.emails.send({
     from: FROM,
     to,
     subject: "Your Boulder Film Collective sign in link",
@@ -33,7 +50,7 @@ export async function sendBoardMagicLink(to: string, url: string) {
       "This link expires in 30 minutes and can be used once.",
       "If you did not request it, you can ignore this email.",
     ].join("\n"),
-  });
+  }), "board magic link");
 }
 
 /** Sends one newsletter email. No-ops without a Resend key. Returns true on send. */
@@ -47,7 +64,10 @@ export async function sendNewsletterEmail(
     console.warn(`RESEND_API_KEY not set; newsletter to ${to} not sent`);
     return false;
   }
-  await resend.emails.send({ from: FROM, to, subject, html, text });
+  assertSent(
+    await resend.emails.send({ from: FROM, to, subject, html, text }),
+    "newsletter",
+  );
   return true;
 }
 
@@ -57,7 +77,7 @@ export async function sendBoardMessageAlert(to: string, url: string) {
     console.warn(`RESEND_API_KEY not set; message alert for ${to}: ${url}`);
     return;
   }
-  await resend.emails.send({
+  assertSent(await resend.emails.send({
     from: FROM,
     to,
     subject: "You have a new message on the Last-Minute Board",
@@ -69,7 +89,7 @@ export async function sendBoardMessageAlert(to: string, url: string) {
       "",
       "For your safety, keep the conversation on the platform until you are ready.",
     ].join("\n"),
-  });
+  }), "board message alert");
 }
 
 /** Sends a confirmation email to admin for all waitlist signups (testing). */
@@ -113,10 +133,10 @@ export async function sendWaitlistNotification({
         `Type: Guest`,
       ].join("\n");
 
-  await resend.emails.send({
+  assertSent(await resend.emails.send({
     from: FROM,
     to: TO,
     subject,
     text: body,
-  });
+  }), "waitlist admin alert");
 }

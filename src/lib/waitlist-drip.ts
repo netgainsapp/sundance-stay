@@ -1,5 +1,6 @@
 import { Resend } from "resend";
 import { prisma } from "@/lib/prisma";
+import { assertSent } from "@/lib/email";
 
 const resend = process.env.RESEND_API_KEY
   ? new Resend(process.env.RESEND_API_KEY)
@@ -146,13 +147,13 @@ async function deliver(
     console.warn(`RESEND_API_KEY not set; drip email to ${to} not sent`);
     return false;
   }
-  await resend.emails.send({
+  assertSent(await resend.emails.send({
     from: FROM,
     to: REDIRECT ?? to,
     replyTo: REPLY_TO,
     subject: REDIRECT ? `[DRIP TEST for ${to}] ${email.subject}` : email.subject,
     text: email.body + "\n" + footer(unsubscribeToken),
-  });
+  }), `drip to ${to}`);
   return true;
 }
 
