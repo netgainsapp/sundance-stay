@@ -87,6 +87,39 @@ export function articleJsonLd({
   };
 }
 
+export function newsArticleJsonLd({
+  title,
+  description,
+  path,
+  image,
+  datePublished,
+  dateModified,
+  sourceUrls,
+}: {
+  title: string;
+  description: string;
+  path: string;
+  image?: string;
+  datePublished: string;
+  dateModified?: string;
+  sourceUrls?: string[];
+}) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "NewsArticle",
+    headline: title,
+    description,
+    url: `${SITE.url}${path}`,
+    mainEntityOfPage: `${SITE.url}${path}`,
+    image: image ? [image] : undefined,
+    datePublished,
+    dateModified: dateModified ?? datePublished,
+    author: { "@type": "Organization", name: SITE.name, url: SITE.url },
+    publisher: { "@type": "Organization", name: SITE.name, url: SITE.url },
+    citation: sourceUrls,
+  };
+}
+
 export function breadcrumbJsonLd(items: { name: string; path: string }[]) {
   return {
     "@context": "https://schema.org",

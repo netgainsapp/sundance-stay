@@ -1,0 +1,65 @@
+{
+  "description": "Persistent record of news topics covered on /news. Checked before writing any new story to prevent duplicate coverage. Follow-ups on a covered topic are allowed only when there is a material development, recorded as a new entry referencing the prior topicId.",
+  "entries": [
+    {
+      "topicId": "midnight-auteur-2121-broadway-hotel",
+      "headline": "Boulder Moves to Sell a Downtown Lot for a 110 Room Hotel as the Sundance Room Shortage Looms",
+      "slug": "downtown-boulder-110-room-hotel-2121-broadway",
+      "eventDate": "2026-07-08",
+      "entities": ["Midnight Auteur LLC", "Ramble Hotel", "Death & Co", "CAGID", "2121 Broadway", "Boulder City Council"],
+      "sourceUrls": ["https://bizwest.com/2026/07/08/downtown-boulder-could-soon-get-110-room-hotel/"],
+      "dateGenerated": "2026-07-11",
+      "datePublished": "2026-07-11",
+      "status": "published",
+      "contentPath": "src/content/news.ts",
+      "followUpWatch": "Boulder City Council vote on the lot sale, expected August 2026"
+    },
+    {
+      "topicId": "festival-lodging-license-rollout",
+      "headline": "Boulder's Festival Lodging Program Gains Steam: Hundreds of Licenses Issued Ahead of Sundance 2027",
+      "slug": "festival-lodging-license-boulder-momentum-july-2026",
+      "eventDate": "2026-07-09",
+      "entities": ["Boulder Festival Lodging Program", "Visit Boulder", "Festival Lodging Rental License", "Boulder City Council"],
+      "sourceUrls": [
+        "https://www.bouldercoloradousa.com/sundance-film-festival/festival-lodging-program/",
+        "https://boulderreportinglab.org/2026/06/14/boulder-bet-34-million-to-land-sundance-high-lodging-prices-are-raising-concerns/",
+        "https://bouldercolorado.gov/guide/2027-sundance-film-festival"
+      ],
+      "dateGenerated": "2026-07-11",
+      "datePublished": "2026-07-11",
+      "status": "published",
+      "contentPath": "src/content/news.ts",
+      "followUpWatch": "Updated license issuance counts from the city; next program webinar"
+    },
+    {
+      "topicId": "fipresci-jury-sundance-2027",
+      "headline": "International Film Critics Will Judge at Sundance for the First Boulder Edition",
+      "slug": "fipresci-critics-jury-sundance-2027",
+      "eventDate": "2026-07",
+      "entities": ["FIPRESCI", "Sundance Institute", "World Narrative Competition", "World Documentary Competition"],
+      "sourceUrls": [
+        "https://www.sundance.org/blogs/fipresci-establishes-jury-at-sundance-film-festival-2/",
+        "https://x.com/sundancefest/status/2074899883283058804"
+      ],
+      "dateGenerated": "2026-07-11",
+      "datePublished": "2026-07-11",
+      "status": "published",
+      "contentPath": "src/content/news.ts",
+      "followUpWatch": "Jury member announcement closer to January 2027"
+    }
+  ],
+  "rejectedTopics": [
+    {
+      "topicId": "screendaily-festival-calendar",
+      "reason": "Generic festival calendar page, no Boulder specific event"
+    },
+    {
+      "topicId": "boulder-lodging-price-alarm-june",
+      "reason": "Boulder Reporting Lab price story is from June 14, 2026, outside the 7 day window; its verifiable facts were folded into the lodging license story instead"
+    },
+    {
+      "topicId": "fox-property-edit-boulder-partnership",
+      "reason": "July 1, 2026 Travel And Tour World story; sole source is a low authority aggregator and the piece contains a factual error (places the 2027 festival in Park City); skipped pending a better source"
+    }
+  ]
+}

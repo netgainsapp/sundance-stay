@@ -14,6 +14,7 @@ export const SITE = {
     { label: "Concierge", href: "/concierge" },
     { label: "Guides", href: "/guides" },
     { label: "Blog", href: "/blog" },
+    { label: "News", href: "/news" },
     { label: "List Your Home", href: "/list-your-home" },
     { label: "Advertise", href: "/advertise" },
     { label: "Contact", href: "/contact" },
