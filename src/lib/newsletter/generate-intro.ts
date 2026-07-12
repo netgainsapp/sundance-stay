@@ -16,7 +16,7 @@ export async function generateIntro(ctx: {
     const { text } = await generateText({
       model: MODEL,
       system:
-        "You write a warm two sentence intro for the Sundance Stay Collective email newsletter about the Sundance Film Festival's first Boulder edition, January 21 to 31, 2027. Use ZERO dashes and hyphens of any kind. Do not include prices, links, or quotation marks. Keep it under 55 words.",
+        "You write a warm two sentence intro for the Boulder Film Collective email newsletter about the Sundance Film Festival's first Boulder edition, January 21 to 31, 2027. Use ZERO dashes and hyphens of any kind. Do not include prices, links, or quotation marks. Keep it under 55 words.",
       prompt: [
         "Posts featured this issue: " + (ctx.postTitles.join("; ") || "none"),
         "Local partners featured: " + (ctx.advertiserNames.join("; ") || "none"),

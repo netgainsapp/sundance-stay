@@ -9,7 +9,7 @@ export const blogPosts: BlogPost[] = [
     category: "Sundance 2027",
     featuredImage:
       "https://images.unsplash.com/photo-1600104146011-ad1a8571f161?w=1400&q=80",
-    author: "The Sundance Stay Collective Team",
+    author: "The Boulder Film Collective Team",
     publishedAt: "2026-06-15",
     tags: ["Sundance 2027", "Lodging", "Neighborhoods"],
     content: `The Sundance Film Festival is moving to Boulder, Colorado, and the first edition runs January 21 to 31, 2027. For ten days the city will host screenings, filmmakers, and visitors from around the world, and lodging will be the single hardest thing to secure. This guide walks through where to stay, how the neighborhoods differ, and how to lock in the right home before the city fills up.
@@ -53,7 +53,7 @@ If the city core is full or above your budget, the nearby towns are excellent ba
     category: "Travel Tips",
     featuredImage:
       "https://images.unsplash.com/photo-1449965408869-eaa3f722e40d?w=1400&q=80",
-    author: "The Sundance Stay Collective Team",
+    author: "The Boulder Film Collective Team",
     publishedAt: "2026-06-10",
     tags: ["Transportation", "Travel Tips"],
     content: `Most visitors reach Boulder through Denver International Airport, roughly an hour away depending on weather and traffic. There are several good ways to cover the distance, and the right one depends on your budget, your group size, and how much you value a door to door ride after a long flight.
@@ -92,7 +92,7 @@ Boulder is refreshingly walkable once you are settled, and the downtown core pac
     category: "Sundance 2027",
     featuredImage:
       "https://images.unsplash.com/photo-1502602898657-3e91760cbb34?w=1400&q=80",
-    author: "The Sundance Stay Collective Team",
+    author: "The Boulder Film Collective Team",
     publishedAt: "2026-04-08",
     tags: ["Sundance 2027", "Lodging", "Travel Tips"],
     content: `The first Boulder edition of the Sundance Film Festival runs January 21 to 31, 2027, and the single biggest mistake a visitor can make is waiting too long to reserve a place to stay. Boulder is a small city playing host to a very large event, so the math is simple. Demand will outrun supply, and the travelers who move early are the ones who choose where they sleep rather than settling for whatever is left. This guide lays out a clear booking calendar so you stay ahead of the crowd.
@@ -142,7 +142,7 @@ Reserve early, reserve the things you cannot fix later, and compare the full cos
     category: "Sundance 2027",
     featuredImage:
       "https://images.unsplash.com/photo-1454496522488-7a8e488e8606?w=1400&q=80",
-    author: "The Sundance Stay Collective Team",
+    author: "The Boulder Film Collective Team",
     publishedAt: "2026-04-22",
     tags: ["Sundance 2027", "Travel Tips", "First Timer"],
     content: `If 2027 is your first Sundance and your first trip to Boulder, welcome. The festival runs January 21 to 31, 2027, in its new mountain town home, and it is a wonderful event to experience even if you have never set foot at a film festival before. This guide walks a first timer through how the festival works, how to plan your days, and how to settle into Boulder so the whole trip feels easy.
@@ -195,7 +195,7 @@ The best part of a first Sundance is the surprise. Some of the films you stumble
     category: "Sundance 2027",
     featuredImage:
       "https://images.unsplash.com/photo-1516644267149-681fb9f0624c?w=1400&q=80",
-    author: "The Sundance Stay Collective Team",
+    author: "The Boulder Film Collective Team",
     publishedAt: "2026-05-06",
     tags: ["Sundance 2027", "Travel Tips"],
     content: `For more than four decades the Sundance Film Festival called Park City, Utah, home. Beginning in 2027 it moves to Boulder, Colorado, under a long term agreement, and the first Boulder edition runs January 21 to 31, 2027. If you attended in Utah or always meant to, the move changes some things and keeps others. This guide covers what festivalgoers actually need to know about the new home.
@@ -240,7 +240,7 @@ Because Boulder is a smaller city hosting a very large event, lodging is the thi
     category: "Dining",
     featuredImage:
       "https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=1400&q=80",
-    author: "The Sundance Stay Collective Team",
+    author: "The Boulder Film Collective Team",
     publishedAt: "2026-05-20",
     tags: ["Dining", "Boulder", "Festival Week"],
     content: `Boulder punches well above its size when it comes to food. The city has built a national reputation for chef driven kitchens, an obsession with fresh local ingredients, and a dining scene that ranges from white tablecloth to lively counter service. During festival week tables will be in high demand, so this guide highlights standout spots to know and how to actually get a seat.
@@ -290,7 +290,7 @@ Boulder takes its food seriously, and festival week is a chance to taste why. Mi
     category: "Travel Tips",
     featuredImage:
       "https://images.unsplash.com/photo-1653250947541-756cf6d786f4?w=1400&q=80",
-    author: "The Sundance Stay Collective Team",
+    author: "The Boulder Film Collective Team",
     publishedAt: "2026-05-28",
     tags: ["Budget", "Travel Tips", "Sundance 2027"],
     content: `A film festival in a small mountain city can sound expensive, but it does not have to be. With some planning you can enjoy the 2027 Sundance Film Festival in Boulder, January 21 to 31, without overspending. The trick is to be smart about the three biggest costs, which are lodging, transportation, and food, and to take advantage of how much of Boulder is simply free to enjoy. Here is a practical budget playbook.
@@ -340,7 +340,7 @@ A budget Sundance in Boulder is entirely doable. Book lodging early and a little
     category: "Travel Tips",
     featuredImage:
       "https://images.unsplash.com/photo-1484154218962-a197022b5858?w=1400&q=80",
-    author: "The Sundance Stay Collective Team",
+    author: "The Boulder Film Collective Team",
     publishedAt: "2026-06-03",
     tags: ["Family", "Travel Tips", "Sundance 2027"],
     content: `Bringing the kids to the 2027 Sundance Film Festival in Boulder can be one of the best family trips you take. The festival runs January 21 to 31, 2027, and Boulder happens to be a genuinely family friendly mountain town with museums, snow play, and an easy walkable core. The key is choosing lodging that fits a family and lining up enough kid friendly activities to fill the hours between screenings. Here is how to plan it.
@@ -392,7 +392,7 @@ A family Sundance in Boulder blends the magic of the festival with a mountain to
     category: "Boulder",
     featuredImage:
       "https://images.unsplash.com/photo-1659730251471-1b1dfc88b491?w=1400&q=80",
-    author: "The Sundance Stay Collective Team",
+    author: "The Boulder Film Collective Team",
     publishedAt: "2026-06-12",
     tags: ["Boulder", "Things to Do", "Festival Week"],
     content: `Some of the best moments of a festival happen between the films. A couple of free hours in Boulder is an invitation to explore a city that rewards wandering, whether you want fresh air, good coffee, a bit of culture, or just a quiet place to recharge. This guide collects quick, rewarding ways to fill the downtime during the 2027 Sundance Film Festival, January 21 to 31.
@@ -445,7 +445,7 @@ The films are the reason you came, but the hours around them are where you actua
     category: "Hosting",
     featuredImage:
       "https://images.unsplash.com/photo-1459749411175-04bf5292ceea?w=1400&q=80",
-    author: "The Sundance Stay Collective Team",
+    author: "The Boulder Film Collective Team",
     publishedAt: "2026-06-18",
     tags: ["Hosting", "Boulder", "Sundance 2027"],
     content: `The Sundance Film Festival arriving in Boulder, January 21 to 31, 2027, brings a real opportunity for local homeowners. Visitors will far outnumber the usual lodging supply, and a well prepared Boulder home can welcome festival guests and earn meaningful income during the event. The key is doing it right, which starts with following the City of Boulder's rules and ends with being a thoughtful, well organized host. Here is what hosting during the festival involves.
@@ -476,7 +476,7 @@ The best hosts make a guest's festival easier. Share a short guide to your neigh
 Hosting during a packed event takes coordination. Line up reliable cleaning between any back to back bookings, decide whether you will be in town or away, and plan how guests will access the home. Confirm your insurance situation for hosting and keep good records. The more you sort out before January, the smoother the festival window runs when the city is at its busiest.
 
 ## List Your Home with Us
-If you own a Boulder home and want to take part in the festival, listing it is straightforward once you are licensed and prepared. The Sundance Stay Collective connects festival visitors with welcoming, properly licensed local homes, and we make it easy to present your home to the right guests. Get your Festival Lodging Rental License in motion, ready your home for a Boulder winter, and reach out to list your home for the 2027 festival. Hosting done right is good for you, good for your guests, and good for the city welcoming the festival to its new home.`,
+If you own a Boulder home and want to take part in the festival, listing it is straightforward once you are licensed and prepared. The Boulder Film Collective connects festival visitors with welcoming, properly licensed local homes, and we make it easy to present your home to the right guests. Get your Festival Lodging Rental License in motion, ready your home for a Boulder winter, and reach out to list your home for the 2027 festival. Hosting done right is good for you, good for your guests, and good for the city welcoming the festival to its new home.`,
     relatedSlugs: ["where-to-stay-sundance-2027-boulder", "when-to-book-boulder-lodging-sundance"],
     faqs: [
       {

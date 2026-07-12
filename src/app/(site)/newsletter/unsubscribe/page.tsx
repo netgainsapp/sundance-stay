@@ -6,7 +6,7 @@ export const dynamic = "force-dynamic";
 
 export const metadata = pageMetadata({
   title: "Unsubscribe",
-  description: "Unsubscribe from the Sundance Stay Collective newsletter.",
+  description: "Unsubscribe from the Boulder Film Collective newsletter.",
   path: "/newsletter/unsubscribe",
 });
 
@@ -36,7 +36,7 @@ export default async function UnsubscribePage({
         title={done ? "You are unsubscribed" : "Unsubscribe"}
         intro={
           done
-            ? "You will no longer receive the Sundance Stay Collective newsletter. You are always welcome back."
+            ? "You will no longer receive the Boulder Film Collective newsletter. You are always welcome back."
             : "We could not find that subscription. It may already be removed."
         }
       />

@@ -15,7 +15,7 @@ import {
 } from "@/lib/pricing";
 
 export const metadata = pageMetadata({
-  title: "Advertise with Sundance Stay Collective",
+  title: "Advertise with Boulder Film Collective",
   description:
     "Reach Festival Season visitors and Boulder area travelers. Standard listings, Premier placement, and a limited homepage carousel.",
   path: "/advertise",

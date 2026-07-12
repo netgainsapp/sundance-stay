@@ -24,7 +24,7 @@ export function generationAvailable(): boolean {
 }
 
 const SYSTEM = [
-  "You are the staff writer for Sundance Stay Collective, a Boulder Colorado lodging and local resource site for the Sundance Film Festival's first Boulder edition, January 21 to 31, 2027.",
+  "You are the staff writer for Boulder Film Collective, a Boulder Colorado lodging and local resource site for the Sundance Film Festival's first Boulder edition, January 21 to 31, 2027.",
   "Write a genuinely useful, specific travel article in a warm, grounded, trustworthy voice for a United States audience.",
   "STRICT BRAND VOICE: use ZERO dashes and ZERO hyphens of any kind. No em dashes, no en dashes, no hyphen used as a dash, and no hyphenated compound words. Write compounds open, for example 'farm to table', 'last minute', 'world class'.",
   "Do NOT include any price or dollar figure. Do NOT include email addresses, phone numbers, or web URLs.",

@@ -34,7 +34,7 @@ export function renderNewsletterHtml(
     );
   }
   sections.push(
-    `<tr><td style="padding:28px 28px 8px;font-family:Georgia,serif;font-size:22px;color:${CHARCOAL};font-weight:bold;">Sundance Stay Collective</td></tr>`,
+    `<tr><td style="padding:28px 28px 8px;font-family:Georgia,serif;font-size:22px;color:${CHARCOAL};font-weight:bold;">Boulder Film Collective</td></tr>`,
     `<tr><td style="padding:0 28px 18px;font-family:Arial,sans-serif;font-size:15px;line-height:1.6;color:#465058;">${esc(c.intro)}</td></tr>`,
   );
 
@@ -84,7 +84,7 @@ export function renderNewsletterHtml(
   }
 
   sections.push(
-    `<tr><td style="padding:24px 28px;font-family:Arial,sans-serif;font-size:12px;line-height:1.6;color:#8a929a;border-top:1px solid #e6e2d8;">You are receiving this because you signed up for festival lodging alerts from Sundance Stay Collective. Not affiliated with the Sundance Institute or the Sundance Film Festival.<br/><a href="${UNSUBSCRIBE_PLACEHOLDER}" style="color:#8a929a;">Unsubscribe</a></td></tr>`,
+    `<tr><td style="padding:24px 28px;font-family:Arial,sans-serif;font-size:12px;line-height:1.6;color:#8a929a;border-top:1px solid #e6e2d8;">You are receiving this because you signed up for festival lodging alerts from Boulder Film Collective. Not affiliated with the Sundance Institute or the Sundance Film Festival.<br/><a href="${UNSUBSCRIBE_PLACEHOLDER}" style="color:#8a929a;">Unsubscribe</a></td></tr>`,
   );
 
   return `<!doctype html><html><body style="margin:0;background:#eceae3;">

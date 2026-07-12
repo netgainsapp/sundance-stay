@@ -2,7 +2,7 @@ import type { GeneratedDraft } from "./types";
 
 export const CTA_MARKER = "Browse the homes";
 export const CTA_TEXT =
-  "Planning a Boulder stay for the festival? Browse the homes available for the festival window on Sundance Stay Collective.";
+  "Planning a Boulder stay for the festival? Browse the homes available for the festival window on Boulder Film Collective.";
 
 /** Kebab-case slug from a title, capped at 80 chars. */
 export function slugify(title: string): string {

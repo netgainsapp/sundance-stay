@@ -23,7 +23,7 @@ function mapGenerated(p: GeneratedPost): BlogPost {
     category: TYPE_CATEGORY[p.postType] ?? "Boulder",
     featuredImage: p.featuredImage,
     content: p.bodyMd,
-    author: "The Sundance Stay Collective Team",
+    author: "The Boulder Film Collective Team",
     publishedAt: isoDate(p.publishedAt ?? p.createdAt),
     tags: Array.isArray(p.tags) ? (p.tags as string[]) : [],
   };
