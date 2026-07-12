@@ -1,5 +1,9 @@
 import type { MetadataRoute } from "next";
 import { SITE } from "@/lib/site";
+
+// Regenerate hourly so engine-published posts appear without relying on
+// revalidatePath, which does not reliably reach metadata routes.
+export const revalidate = 3600;
 import { businesses } from "@/content/businesses";
 import { guides } from "@/content/guides";
 import { blogPosts } from "@/content/blog";
