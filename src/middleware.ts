@@ -6,8 +6,9 @@ import { verifyBoardToken, BOARD_COOKIE_NAME } from "@/lib/board-session";
 export async function middleware(req: NextRequest) {
   const { pathname } = req.nextUrl;
 
-  // Waitlist gate: require cookie to access full site
-  const gatedRoutes = ["/stay", "/last-minute", "/services", "/concierge", "/guides", "/blog", "/neighborhoods", "/list-your-home", "/advertise", "/contact"];
+  // Waitlist gate: marketplace features stay members-only. /blog, /guides and
+  // /news are public so search engines can crawl the content surfaces.
+  const gatedRoutes = ["/stay", "/last-minute", "/services", "/concierge", "/neighborhoods", "/list-your-home", "/advertise", "/contact"];
   const isGated = gatedRoutes.some((route) => pathname.startsWith(route));
   if (isGated) {
     const hasJoinedWaitlist = req.cookies.get("waitlist_joined")?.value === "true";
@@ -53,8 +54,6 @@ export const config = {
     "/last-minute/:path*",
     "/services/:path*",
     "/concierge/:path*",
-    "/guides/:path*",
-    "/blog/:path*",
     "/neighborhoods/:path*",
     "/list-your-home/:path*",
     "/advertise/:path*",
