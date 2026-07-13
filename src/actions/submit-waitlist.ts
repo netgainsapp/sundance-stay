@@ -2,7 +2,7 @@
 
 import { prisma } from "@/lib/prisma";
 import { sendWaitlistNotification } from "@/lib/email";
-import { sendWelcome } from "@/lib/waitlist-drip";
+import { forwardToDispatch } from "@/lib/dispatch";
 
 type WaitlistData = {
   email: string;
@@ -50,13 +50,15 @@ export async function submitWaitlistSignup(
       console.error("waitlist admin alert failed", err);
     }
 
-    // Welcome email to the subscriber (redirected to the test inbox while
-    // WAITLIST_DRIP_REDIRECT is set). Drip stages 1..3 follow via daily cron.
-    await sendWelcome({
-      email: waitlistEntry.email,
-      isPartner: waitlistEntry.isPartner,
-      unsubscribeToken: waitlistEntry.unsubscribeToken,
-    });
+    // Dispatch now owns the newsletter list. Forward the signup so Dispatch
+    // sends the double opt-in and all subscriber facing email. A forward
+    // failure is logged but must not fail the signup; the local row is saved
+    // and the site gate cookie is set regardless.
+    try {
+      await forwardToDispatch(waitlistEntry.email);
+    } catch (err) {
+      console.error("dispatch forward failed", err);
+    }
 
     return { ok: true };
   } catch (error) {
